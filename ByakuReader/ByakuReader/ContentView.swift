@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var authFlow: AuthViewManager =  .signIn
     var body: some View {
         VStack {
             Image(systemName: "globe")

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+enum HomeViewManager {
+    case leaderboard
+    case favorite
+    case home
+}

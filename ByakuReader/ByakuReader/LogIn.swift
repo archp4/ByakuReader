@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct LogIn: View {
+    @Binding var authFlow: AuthViewManager
+    @EnvironmentObject var user : User
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Login")
     }
 }
 
 #Preview {
-    LogIn()
+    LogIn(authFlow:.constant(.signUp)).environmentObject(User())
 }
