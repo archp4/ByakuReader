@@ -11,6 +11,8 @@
 		BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC742DFCAE9E00AA055A /* ContentView.swift */; };
 		BD8FDC772DFCAEB500AA055A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8FDC762DFCAEB500AA055A /* Assets.xcassets */; };
 		BD8FDC7A2DFCAEB500AA055A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8FDC792DFCAEB500AA055A /* Preview Assets.xcassets */; };
+		BD8FDC812DFCAFFE00AA055A /* AuthViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */; };
+		BD8FDC832DFCB12B00AA055A /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +21,8 @@
 		BD8FDC742DFCAE9E00AA055A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BD8FDC762DFCAEB500AA055A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD8FDC792DFCAEB500AA055A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewManager.swift; sourceTree = "<group>"; };
+		BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 				BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */,
 				BD8FDC742DFCAE9E00AA055A /* ContentView.swift */,
 				BD8FDC762DFCAEB500AA055A /* Assets.xcassets */,
+				BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */,
+				BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */,
 				BD8FDC782DFCAEB500AA055A /* Preview Content */,
 			);
 			path = ByakuReader;
@@ -139,6 +145,8 @@
 			files = (
 				BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */,
 				BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */,
+				BD8FDC812DFCAFFE00AA055A /* AuthViewManager.swift in Sources */,
+				BD8FDC832DFCB12B00AA055A /* HomeViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
