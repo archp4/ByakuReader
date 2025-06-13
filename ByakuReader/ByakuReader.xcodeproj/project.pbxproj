@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8BB8216B2DFCB103003D575E /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8216A2DFCB103003D575E /* LogIn.swift */; };
+		8BB8216D2DFCB118003D575E /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8216C2DFCB118003D575E /* SignUp.swift */; };
+		8BB8216F2DFCB124003D575E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8216E2DFCB124003D575E /* Home.swift */; };
+		8BB821712DFCB131003D575E /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821702DFCB131003D575E /* Search.swift */; };
+		8BB821732DFCB145003D575E /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821722DFCB145003D575E /* Favorite.swift */; };
+		8BB821752DFCB151003D575E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821742DFCB151003D575E /* Profile.swift */; };
+		8BB821772DFCB15F003D575E /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821762DFCB15F003D575E /* Leaderboard.swift */; };
+		8BB821792DFCB16E003D575E /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821782DFCB16E003D575E /* Detail.swift */; };
+		8BB8217B2DFCB179003D575E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8217A2DFCB179003D575E /* Chapter.swift */; };
 		BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */; };
 		BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC742DFCAE9E00AA055A /* ContentView.swift */; };
 		BD8FDC772DFCAEB500AA055A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8FDC762DFCAEB500AA055A /* Assets.xcassets */; };
@@ -14,6 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8BB8216A2DFCB103003D575E /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
+		8BB8216C2DFCB118003D575E /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		8BB8216E2DFCB124003D575E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		8BB821702DFCB131003D575E /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		8BB821722DFCB145003D575E /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		8BB821742DFCB151003D575E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		8BB821762DFCB15F003D575E /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
+		8BB821782DFCB16E003D575E /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		8BB8217A2DFCB179003D575E /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		BD8FDC6F2DFCAE9E00AA055A /* ByakuReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByakuReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByakuReaderApp.swift; sourceTree = "<group>"; };
 		BD8FDC742DFCAE9E00AA055A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +73,15 @@
 				BD8FDC742DFCAE9E00AA055A /* ContentView.swift */,
 				BD8FDC762DFCAEB500AA055A /* Assets.xcassets */,
 				BD8FDC782DFCAEB500AA055A /* Preview Content */,
+				8BB8216A2DFCB103003D575E /* LogIn.swift */,
+				8BB8216C2DFCB118003D575E /* SignUp.swift */,
+				8BB8216E2DFCB124003D575E /* Home.swift */,
+				8BB821702DFCB131003D575E /* Search.swift */,
+				8BB821722DFCB145003D575E /* Favorite.swift */,
+				8BB821742DFCB151003D575E /* Profile.swift */,
+				8BB821762DFCB15F003D575E /* Leaderboard.swift */,
+				8BB821782DFCB16E003D575E /* Detail.swift */,
+				8BB8217A2DFCB179003D575E /* Chapter.swift */,
 			);
 			path = ByakuReader;
 			sourceTree = "<group>";
@@ -138,7 +165,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */,
+				8BB821752DFCB151003D575E /* Profile.swift in Sources */,
+				8BB821732DFCB145003D575E /* Favorite.swift in Sources */,
+				8BB8216D2DFCB118003D575E /* SignUp.swift in Sources */,
+				8BB8216F2DFCB124003D575E /* Home.swift in Sources */,
+				8BB821712DFCB131003D575E /* Search.swift in Sources */,
+				8BB821792DFCB16E003D575E /* Detail.swift in Sources */,
+				8BB8216B2DFCB103003D575E /* LogIn.swift in Sources */,
+				8BB821772DFCB15F003D575E /* Leaderboard.swift in Sources */,
 				BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */,
+				8BB8217B2DFCB179003D575E /* Chapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
