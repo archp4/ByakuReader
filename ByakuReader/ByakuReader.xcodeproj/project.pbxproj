@@ -56,6 +56,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8BF50A8F2E01F8F0008F8BD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8BB8216A2DFCB103003D575E /* LogIn.swift */,
+				8BB8216C2DFCB118003D575E /* SignUp.swift */,
+				8BB8216E2DFCB124003D575E /* Home.swift */,
+				8BB821702DFCB131003D575E /* Search.swift */,
+				8BB821722DFCB145003D575E /* Favorite.swift */,
+				8BB821742DFCB151003D575E /* Profile.swift */,
+				8BB821762DFCB15F003D575E /* Leaderboard.swift */,
+				8BB821782DFCB16E003D575E /* Detail.swift */,
+				8BB8217A2DFCB179003D575E /* Chapter.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8BF50A902E01F94A008F8BD8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BD8CC5EC2DFCB7870069C53C /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		BD8FDC662DFCAE9D00AA055A = {
 			isa = PBXGroup;
 			children = (
@@ -75,22 +99,14 @@
 		BD8FDC712DFCAE9E00AA055A /* ByakuReader */ = {
 			isa = PBXGroup;
 			children = (
+				8BF50A902E01F94A008F8BD8 /* Model */,
+				8BF50A8F2E01F8F0008F8BD8 /* View */,
 				BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */,
 				BD8FDC742DFCAE9E00AA055A /* ContentView.swift */,
 				BD8FDC762DFCAEB500AA055A /* Assets.xcassets */,
 				BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */,
 				BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */,
 				BD8FDC782DFCAEB500AA055A /* Preview Content */,
-				8BB8216A2DFCB103003D575E /* LogIn.swift */,
-				8BB8216C2DFCB118003D575E /* SignUp.swift */,
-				8BB8216E2DFCB124003D575E /* Home.swift */,
-				8BB821702DFCB131003D575E /* Search.swift */,
-				8BB821722DFCB145003D575E /* Favorite.swift */,
-				8BB821742DFCB151003D575E /* Profile.swift */,
-				8BB821762DFCB15F003D575E /* Leaderboard.swift */,
-				8BB821782DFCB16E003D575E /* Detail.swift */,
-				8BB8217A2DFCB179003D575E /* Chapter.swift */,
-				BD8CC5EC2DFCB7870069C53C /* User.swift */,
 			);
 			path = ByakuReader;
 			sourceTree = "<group>";

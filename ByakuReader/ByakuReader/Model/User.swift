@@ -12,7 +12,7 @@ class User : ObservableObject {
     @Published var userName: String
     @Published var userEmail: String
     @Published var userPassword: String
-    
+        
     init(userId: String, userName: String, userEmail: String, userPassword: String) {
         self.userId = userId
         self.userName = userName
