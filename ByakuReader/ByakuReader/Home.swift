@@ -1,5 +1,5 @@
 //
-//  Leaderboard.swift
+//  Home.swift
 //  ByakuReader
 //
 //  Created by Yash Vipul Naik on 2025-06-13.
@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct Leaderboard: View {
+struct Home: View {
+    
     var body: some View {
-        Text("Leaderboard")
+        Text("Home")
     }
 }
 
 #Preview {
-    Leaderboard()
+    Home()
 }

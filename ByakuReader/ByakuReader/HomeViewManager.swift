@@ -5,9 +5,28 @@
 //  Created by Arch Umeshbhai Patel on 2025-06-13.
 //
 
-import Foundation
-enum HomeViewManager {
-    case leaderboard
-    case favorite
-    case home
+import SwiftUI
+
+struct HomeViewManager: View {
+    @Binding var authFlow: AuthViewManager
+    @EnvironmentObject var user : User
+    var body: some View {
+        TabView{
+            Home().tabItem {
+                Image(systemName: "person")
+                Text("Home")
+            }
+            Favorite().tabItem {
+                Image(systemName: "ladybug.fill")
+                Text("My Favourite")
+            }
+            Leaderboard().tabItem {
+                Image(systemName: "snowflake")
+                Text("Leaderboard")
+            }
+        }
+    }
+}
+#Preview {
+    HomeViewManager(authFlow:.constant(.home)).environmentObject(User())
 }
