@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User {
+class User : ObservableObject {
     let userId : String
     let userName: String
     let userEmail: String
