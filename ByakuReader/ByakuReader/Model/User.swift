@@ -8,11 +8,11 @@
 import Foundation
 
 class User : ObservableObject {
-    let userId : String
-    let userName: String
-    let userEmail: String
-    let userPassword: String
-    
+    @Published var userId : String
+    @Published var userName: String
+    @Published var userEmail: String
+    @Published var userPassword: String
+        
     init(userId: String, userName: String, userEmail: String, userPassword: String) {
         self.userId = userId
         self.userName = userName
