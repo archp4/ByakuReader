@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct SignUp: View {
+    @Binding var authFlow: AuthViewManager
+    @State var email: String = ""
+    @State var username: String = ""
+    @State var confirmPassword: String = ""
+    @State var password: String = ""
+    @EnvironmentObject var user : User
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            TextField("Enter Name",text: $username)
+                .padding()
+            TextField("Enter Email",text: $email)
+                .padding()
+            SecureField("Enter Password", text: $password)
+                .padding()
+            SecureField("Enter Confirm Password", text: $confirmPassword)
+                .padding()
+            Button("Sign Up"){
+                authFlow = .home
+            }
+            .buttonStyle(.borderedProminent)
+            .frame(width: .infinity)
+            Spacer()
+            Button("Already have account? Login"){
+                authFlow = .signIn
+            }
+            .navigationTitle("Create Your Account")
+        }
     }
 }
 
 #Preview {
-    SignUp()
+    SignUp(authFlow:.constant(.signUp)).environmentObject(User())
 }

@@ -9,14 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State var authFlow: AuthViewManager =  .signIn
+    @StateObject var user : User = User()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        switch authFlow {
+        case .signUp:
+            SignUp(authFlow: $authFlow).environmentObject(user)
+        case .signIn:
+            LogIn(authFlow: $authFlow).environmentObject(user)
+        case .home:
+            Home(authFlow: $authFlow).environmentObject(user)
         }
-        .padding()
     }
 }
 

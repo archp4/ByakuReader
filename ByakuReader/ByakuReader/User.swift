@@ -7,11 +7,11 @@
 
 import Foundation
 
-class User {
-    let userId : String
-    let userName: String
-    let userEmail: String
-    let userPassword: String
+class User : ObservableObject {
+    @Published var userId : String
+    @Published var userName: String
+    @Published var userEmail: String
+    @Published var userPassword: String
     
     init(userId: String, userName: String, userEmail: String, userPassword: String) {
         self.userId = userId
