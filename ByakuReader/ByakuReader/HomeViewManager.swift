@@ -13,15 +13,15 @@ struct HomeViewManager: View {
     var body: some View {
         TabView{
             Home().tabItem {
-                Image(systemName: "person")
+                Image(systemName: "house.fill")
                 Text("Home")
             }
             Favorite().tabItem {
-                Image(systemName: "ladybug.fill")
+                Image(systemName: "heart.fill")
                 Text("My Favourite")
             }
             Leaderboard().tabItem {
-                Image(systemName: "snowflake")
+                Image(systemName: "trophy.fill")
                 Text("Leaderboard")
             }
         }
