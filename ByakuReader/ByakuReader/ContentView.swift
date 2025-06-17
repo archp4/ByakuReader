@@ -17,7 +17,7 @@ struct ContentView: View {
         case .signIn:
             LogIn(authFlow: $authFlow).environmentObject(user)
         case .home:
-            Home(authFlow: $authFlow).environmentObject(user)
+            HomeViewManager(authFlow: $authFlow).environmentObject(user)
         }
     }
 }
