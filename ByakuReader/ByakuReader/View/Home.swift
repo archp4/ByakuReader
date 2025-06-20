@@ -28,7 +28,7 @@ struct Home: View {
         NavigationStack{
             VStack{
                 
-                
+                Text("hi")
                 
             } // VStack
             .searchable(text: $searchText)

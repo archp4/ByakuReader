@@ -16,6 +16,7 @@
 		8BB821772DFCB15F003D575E /* Leaderboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821762DFCB15F003D575E /* Leaderboard.swift */; };
 		8BB821792DFCB16E003D575E /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821782DFCB16E003D575E /* Detail.swift */; };
 		8BB8217B2DFCB179003D575E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8217A2DFCB179003D575E /* Chapter.swift */; };
+		8BF50A942E02079F008F8BD8 /* MediumComicTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */; };
 		BD8CC5ED2DFCB7870069C53C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8CC5EC2DFCB7870069C53C /* User.swift */; };
 		BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */; };
 		BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC742DFCAE9E00AA055A /* ContentView.swift */; };
@@ -35,6 +36,7 @@
 		8BB821762DFCB15F003D575E /* Leaderboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leaderboard.swift; sourceTree = "<group>"; };
 		8BB821782DFCB16E003D575E /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		8BB8217A2DFCB179003D575E /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumComicTile.swift; sourceTree = "<group>"; };
 		BD8CC5EC2DFCB7870069C53C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BD8FDC6F2DFCAE9E00AA055A /* ByakuReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByakuReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByakuReaderApp.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				8BB821762DFCB15F003D575E /* Leaderboard.swift */,
 				8BB821782DFCB16E003D575E /* Detail.swift */,
 				8BB8217A2DFCB179003D575E /* Chapter.swift */,
+				8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			files = (
 				BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */,
 				8BB821752DFCB151003D575E /* Profile.swift in Sources */,
+				8BF50A942E02079F008F8BD8 /* MediumComicTile.swift in Sources */,
 				8BB821732DFCB145003D575E /* Favorite.swift in Sources */,
 				8BB8216D2DFCB118003D575E /* SignUp.swift in Sources */,
 				8BB8216F2DFCB124003D575E /* Home.swift in Sources */,
