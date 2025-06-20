@@ -14,7 +14,7 @@ struct MediumComicTile: View {
     @State var showDetail : Bool = false
     
     var body: some View {
-        VStack(alignment: .leading) { 
+        VStack(alignment: .leading) {
             AsyncImage(url: URL(string: comic.imageID)) { phase in
                 if let image = phase.image {
                     image
@@ -34,7 +34,6 @@ struct MediumComicTile: View {
                 .font(.headline)
                 .lineLimit(1)
                 .frame(width: width, alignment: .leading)
-            
             if let subtitle = comic.subtitle {
                 Text(subtitle)
                     .font(.subheadline)
