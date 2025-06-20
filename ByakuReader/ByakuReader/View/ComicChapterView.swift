@@ -23,7 +23,7 @@ struct ComicChapterView : View {
     ]
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             ScrollView(.vertical, showsIndicators: true) {
                 VStack(spacing: 0) {
                     ForEach(comicImageNames, id: \.self) { imageName in
@@ -33,7 +33,7 @@ struct ComicChapterView : View {
                                     .resizable()
                                     .frame(width: .infinity)
                                     .scaledToFill()
-                                    
+                                
                             } else if phase.error != nil {
                                 Color.gray
                             } else {
@@ -43,9 +43,10 @@ struct ComicChapterView : View {
                     }
                 }
             }
+            .navigationTitle("Comic Chapter 01")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.hidden, for: .navigationBar)
         }
-        .navigationTitle("Comic Chapter 01")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

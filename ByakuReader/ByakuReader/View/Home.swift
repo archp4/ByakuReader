@@ -110,7 +110,6 @@ struct Home: View {
         
         NavigationStack{
             VStack{
-                
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
                         ForEach(comicCategories.keys.sorted(), id: \.self) { category in

@@ -11,18 +11,20 @@ struct HomeViewManager: View {
     @Binding var authFlow: AuthViewManager
     @EnvironmentObject var user : User
     var body: some View {
-        TabView{
-            Home(authFlow: $authFlow).tabItem {
-                Image(systemName: "house.fill")
-                Text("Home")
-            }
-            Favorite().tabItem {
-                Image(systemName: "heart.fill")
-                Text("My Favourite")
-            }
-            LeaderboardView().tabItem {
-                Image(systemName: "trophy.fill")
-                Text("Leaderboard")
+        NavigationStack{
+            TabView{
+                Home(authFlow: $authFlow).tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+                Favorite().tabItem {
+                    Image(systemName: "heart.fill")
+                    Text("My Favourite")
+                }
+                LeaderboardView().tabItem {
+                    Image(systemName: "trophy.fill")
+                    Text("Leaderboard")
+                }
             }
         }
     }
