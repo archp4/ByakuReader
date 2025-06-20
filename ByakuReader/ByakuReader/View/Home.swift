@@ -18,7 +18,7 @@ struct Home: View {
         "Trending Now": [
             Comic(
                 title: "Galactic Guardians",
-                subtitle: "The Universe's Last Hope", // <--- NEW: Subtitle added
+                subtitle: "The Universe's Last Hope",
                 author: ["A. Nova", "B. Thorne"],
                 genre: ["Sci-Fi", "Action"],
                 description: "A team of unlikely heroes defends the galaxy from cosmic threats.",
@@ -38,7 +38,7 @@ struct Home: View {
             ),
             Comic(
                 title: "Cyberpunk Alley",
-                subtitle: "Where Code Meets Crime", // <--- NEW: Subtitle added
+                subtitle: "Where Code Meets Crime", 
                 author: ["D. Jax", "E. Quinn"],
                 genre: ["Cyberpunk", "Thriller"],
                 description: "In a neon-drenched future, a lone hacker uncovers a vast conspiracy.",
