@@ -12,7 +12,6 @@ struct HomeViewManager: View {
     @EnvironmentObject var user : User
     var body: some View {
         TabView{
-
             Home().tabItem {
                 Image(systemName: "house.fill")
                 Text("Home")
@@ -21,7 +20,7 @@ struct HomeViewManager: View {
                 Image(systemName: "heart.fill")
                 Text("My Favourite")
             }
-            Leaderboard().tabItem {
+            LeaderboardView().tabItem {
                 Image(systemName: "trophy.fill")
                 Text("Leaderboard")
             }
