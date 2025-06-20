@@ -96,7 +96,7 @@ struct Favorite : View {
     private let comicItemHeight: CGFloat = 225
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView(showsIndicators: false) { // This ScrollView makes the *entire list* scroll vertically
                 // Using LazyVGrid for a grid-like vertical display, or a simple VStack
                 // LazyVGrid is often preferred for performance with many items

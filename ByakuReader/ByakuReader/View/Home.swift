@@ -108,7 +108,7 @@ struct Home: View {
     
     var body: some View {
         
-        NavigationStack{
+        NavigationView{
             VStack{
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {

@@ -11,8 +11,7 @@ struct LeaderboardRow: View {
     let item: LeaderboardItem
     
     var body: some View {
-        HStack {
-            Spacer().frame(width: 20)
+        HStack{
             AsyncImage(url: URL(string: item.imageName)){ phase in
                 if let image = phase.image{
                     image
@@ -44,6 +43,7 @@ struct LeaderboardRow: View {
             .padding(.leading, 10)
         } 
         .padding(.vertical, 8)
+        
     }
     
 }

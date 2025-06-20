@@ -20,13 +20,13 @@ struct LeaderboardView: View {
         LeaderboardItem(rank: 9, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Silver Serpent", views: "60K views", score: "60K"),
         LeaderboardItem(rank: 10, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Golden Gryphon", views: "55K views", score: "55K")
     ]
-
+    
     @State private var selectedRegion: String = "Region"
     @State private var selectedViewFilter: String = "Most Viewed"
     @State var showDetail : Bool = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 0) {
                 HStack {
                     Spacer().frame(width: 20)
@@ -45,21 +45,17 @@ struct LeaderboardView: View {
                     }
                     Spacer()
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
                 List(items) { item in
                     LeaderboardRow(item: item).onTapGesture {
                         showDetail = true
                     }
                 }
                 .listStyle(PlainListStyle())
-                .padding(.horizontal, -20)
+                .padding(.horizontal, 0)
             }
             .navigationTitle("Leaderboard")
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .padding(.bottom, 20)
-            .padding(.top, 10)
-            .edgesIgnoringSafeArea(.horizontal)
+            .navigationBarTitleDisplayMode(.large)
             .navigationDestination(isPresented: $showDetail) {
                 Detail()
             }
