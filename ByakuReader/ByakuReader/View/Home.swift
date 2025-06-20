@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Home: View {
     
-    @Binding var authFlow: AuthViewManager
     @State var email: String = ""
     @State var password: String = ""
     @EnvironmentObject var user : User
@@ -148,5 +147,5 @@ struct Home: View {
 } // home
 
 #Preview {
-    Home(authFlow:.constant(.home)).environmentObject(User())
+    Home().environmentObject(User())
 }
