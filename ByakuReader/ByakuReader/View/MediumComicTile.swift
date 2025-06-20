@@ -8,25 +8,39 @@
 import SwiftUI
 
 struct MediumComicTile: View {
-    
-    let comicImage : Image
-    let comicName : String
+    let comic: Comic
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
-        VStack{
-            comicImage
-                .resizable()
-                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                .frame(height: 250)
-                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20,height: 20), style: .continuous))
-                .shadow(radius: 4)
-            Text(comicName)
+        VStack(alignment: .leading) { 
+            AsyncImage(url: URL(string: comic.imageID)) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } else if phase.error != nil {
+                    Color.gray
+                } else {
+                    ProgressView()
+                }
+            }
+            .frame(width: width, height: height)
+            .cornerRadius(8)
+            .clipped()
+            
+            Text(comic.title)
                 .font(.headline)
-                .frame(width: .infinity,alignment: .leading)
+                .lineLimit(1)
+                .frame(width: width, alignment: .leading)
+            
+            if let subtitle = comic.subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .lineLimit(1)
+                    .frame(width: width, alignment: .leading)
+            }
         }
     }
-}
-
-#Preview {
-    MediumComicTile(comicImage: Image(systemName: "house"), comicName: "One Piece")
 }
