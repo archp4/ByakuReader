@@ -11,6 +11,7 @@ struct MediumComicTile: View {
     let comic: Comic
     let width: CGFloat
     let height: CGFloat
+    @State var showDetail : Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,12 +34,22 @@ struct MediumComicTile: View {
                 .font(.headline)
                 .lineLimit(1)
                 .frame(width: width, alignment: .leading)
+            if let subtitle = comic.subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .lineLimit(1)
+                    .frame(width: width, alignment: .leading)
+            } else {
+                Spacer().frame(width: 20)
+            }
             
-            Text(comic.subtitle ?? " ")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-                .lineLimit(1)
-                .frame(width: width, alignment: .leading)
+        }
+        .onTapGesture {
+            showDetail = true
+        }
+        .navigationDestination(isPresented: $showDetail) {
+                Detail()
         }
     }
 }
