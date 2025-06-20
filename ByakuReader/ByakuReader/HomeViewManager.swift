@@ -12,7 +12,7 @@ struct HomeViewManager: View {
     @EnvironmentObject var user : User
     var body: some View {
         TabView{
-            Home().tabItem {
+            Home(authFlow: $authFlow).tabItem {
                 Image(systemName: "house.fill")
                 Text("Home")
             }

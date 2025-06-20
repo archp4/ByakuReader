@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Home: View {
     
+    @Binding var authFlow: AuthViewManager
     @State var email: String = ""
     @State var password: String = ""
     @EnvironmentObject var user : User
@@ -127,9 +128,9 @@ struct Home: View {
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button{
-                        
+                        authFlow = .signIn
                     } label: {
-                        Image(systemName: "gear")
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
                     } // button
                 }// toolbar item 1
                 
@@ -147,5 +148,5 @@ struct Home: View {
 } // home
 
 #Preview {
-    Home().environmentObject(User())
+    Home(authFlow : .constant(.home)).environmentObject(User())
 }
