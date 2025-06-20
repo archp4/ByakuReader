@@ -128,9 +128,9 @@ struct Home: View {
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button{
-                        
+                        authFlow = .signIn
                     } label: {
-                        Image(systemName: "gear")
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
                     } // button
                 }// toolbar item 1
                 
