@@ -20,7 +20,7 @@ struct HomeViewManager: View {
                 Image(systemName: "ladybug.fill")
                 Text("My Favourite")
             }
-            Leaderboard().tabItem {
+            LeaderboardView().tabItem {
                 Image(systemName: "snowflake")
                 Text("Leaderboard")
             }
