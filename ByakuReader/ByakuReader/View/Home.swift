@@ -8,11 +8,30 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @Binding var authFlow: AuthViewManager
+    @State var email: String = ""
+    @State var password: String = ""
+    @EnvironmentObject var user : User
+    @State var searchText : String = ""
+    
+    private let title = [
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria"
+    ]
+    
+    private var searchResults : [String] {
+        searchText.isEmpty ? title : title.filter { $0.contains(searchText) }
+    }
+    
     var body: some View {
+        
         NavigationStack{
             VStack{
-                Text("Hi")
+                
+                Text("hi")
+                
             } // VStack
+            .searchable(text: $searchText)
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
@@ -38,5 +57,5 @@ struct Home: View {
 } // home
 
 #Preview {
-    Home()
+    Home(authFlow:.constant(.home)).environmentObject(User())
 }
