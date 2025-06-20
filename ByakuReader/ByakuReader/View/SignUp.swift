@@ -28,7 +28,7 @@ struct SignUp: View {
                 authFlow = .home
             }
             .buttonStyle(.borderedProminent)
-            .frame(width: .infinity)
+//            .frame(width: .infinity)
             Spacer()
             Button("Already have account? Login"){
                 authFlow = .signIn
