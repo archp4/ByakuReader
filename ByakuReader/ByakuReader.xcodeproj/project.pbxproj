@@ -20,6 +20,8 @@
 		8BB8217B2DFCB179003D575E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8217A2DFCB179003D575E /* Chapter.swift */; };
 		8BF50A942E02079F008F8BD8 /* MediumComicTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */; };
 		BD8CC5ED2DFCB7870069C53C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8CC5EC2DFCB7870069C53C /* User.swift */; };
+		BD8D93AD2E2187B600206206 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = BD8D93AC2E2187B600206206 /* Appwrite */; };
+		BD8D93B02E2188D600206206 /* Appwrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D93AF2E2188D600206206 /* Appwrite.swift */; };
 		BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */; };
 		BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC742DFCAE9E00AA055A /* ContentView.swift */; };
 		BD8FDC772DFCAEB500AA055A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8FDC762DFCAEB500AA055A /* Assets.xcassets */; };
@@ -45,6 +47,8 @@
 		8BB8217A2DFCB179003D575E /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumComicTile.swift; sourceTree = "<group>"; };
 		BD8CC5EC2DFCB7870069C53C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BD8D93AE2E2187E600206206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BD8D93AF2E2188D600206206 /* Appwrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appwrite.swift; sourceTree = "<group>"; };
 		BD8FDC6F2DFCAE9E00AA055A /* ByakuReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByakuReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByakuReaderApp.swift; sourceTree = "<group>"; };
 		BD8FDC742DFCAE9E00AA055A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD8D93AD2E2187B600206206 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +120,7 @@
 		BD8FDC712DFCAE9E00AA055A /* ByakuReader */ = {
 			isa = PBXGroup;
 			children = (
+				BD8D93AE2E2187E600206206 /* Info.plist */,
 				BDF5571B2E05E6FA00D062A8 /* MiniView */,
 				8BF50A902E01F94A008F8BD8 /* Model */,
 				8BF50A8F2E01F8F0008F8BD8 /* View */,
@@ -124,6 +130,7 @@
 				BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */,
 				BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */,
 				BD8FDC782DFCAEB500AA055A /* Preview Content */,
+				BD8D93AF2E2188D600206206 /* Appwrite.swift */,
 			);
 			path = ByakuReader;
 			sourceTree = "<group>";
@@ -161,6 +168,9 @@
 			dependencies = (
 			);
 			name = ByakuReader;
+			packageProductDependencies = (
+				BD8D93AC2E2187B600206206 /* Appwrite */,
+			);
 			productName = ByakuReader;
 			productReference = BD8FDC6F2DFCAE9E00AA055A /* ByakuReader.app */;
 			productType = "com.apple.product-type.application";
@@ -189,6 +199,9 @@
 				Base,
 			);
 			mainGroup = BD8FDC662DFCAE9D00AA055A;
+			packageReferences = (
+				BD8D93AB2E2187B600206206 /* XCRemoteSwiftPackageReference "sdk-for-apple" */,
+			);
 			productRefGroup = BD8FDC702DFCAE9E00AA055A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -224,6 +237,7 @@
 				BDF557212E05E80500D062A8 /* ComicChapterView.swift in Sources */,
 				8BB8216F2DFCB124003D575E /* Home.swift in Sources */,
 				8BB821712DFCB131003D575E /* Search.swift in Sources */,
+				BD8D93B02E2188D600206206 /* Appwrite.swift in Sources */,
 				BDF5571D2E05E71C00D062A8 /* LeaderboardRow.swift in Sources */,
 				BD8CC5ED2DFCB7870069C53C /* User.swift in Sources */,
 				8BB821792DFCB16E003D575E /* Detail.swift in Sources */,
@@ -370,6 +384,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ByakuReader/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ByakuReader/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -398,6 +413,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ByakuReader/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ByakuReader/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -438,6 +454,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BD8D93AB2E2187B600206206 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BD8D93AC2E2187B600206206 /* Appwrite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD8D93AB2E2187B600206206 /* XCRemoteSwiftPackageReference "sdk-for-apple" */;
+			productName = Appwrite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BD8FDC672DFCAE9D00AA055A /* Project object */;
 }
