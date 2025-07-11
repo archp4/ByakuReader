@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0A03B02E218763007F2578 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 8B0A03AF2E218763007F2578 /* Appwrite */; };
+		8B0A03B32E218891007F2578 /* Appwrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A03B22E218891007F2578 /* Appwrite.swift */; };
 		8B4D81E12E05D6F900E593F3 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D81E02E05D6F900E593F3 /* Comic.swift */; };
 		8B4D81E32E05DA7D00E593F3 /* HomeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D81E22E05DA7D00E593F3 /* HomeRowView.swift */; };
 		8BB8216B2DFCB103003D575E /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8216A2DFCB103003D575E /* LogIn.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B0A03B12E2187F1007F2578 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8B0A03B22E218891007F2578 /* Appwrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appwrite.swift; sourceTree = "<group>"; };
 		8B4D81E02E05D6F900E593F3 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		8B4D81E22E05DA7D00E593F3 /* HomeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRowView.swift; sourceTree = "<group>"; };
 		8BB8216A2DFCB103003D575E /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B0A03B02E218763007F2578 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +120,7 @@
 		BD8FDC712DFCAE9E00AA055A /* ByakuReader */ = {
 			isa = PBXGroup;
 			children = (
+				8B0A03B12E2187F1007F2578 /* Info.plist */,
 				BDF5571B2E05E6FA00D062A8 /* MiniView */,
 				8BF50A902E01F94A008F8BD8 /* Model */,
 				8BF50A8F2E01F8F0008F8BD8 /* View */,
@@ -124,6 +130,7 @@
 				BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */,
 				BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */,
 				BD8FDC782DFCAEB500AA055A /* Preview Content */,
+				8B0A03B22E218891007F2578 /* Appwrite.swift */,
 			);
 			path = ByakuReader;
 			sourceTree = "<group>";
@@ -161,6 +168,9 @@
 			dependencies = (
 			);
 			name = ByakuReader;
+			packageProductDependencies = (
+				8B0A03AF2E218763007F2578 /* Appwrite */,
+			);
 			productName = ByakuReader;
 			productReference = BD8FDC6F2DFCAE9E00AA055A /* ByakuReader.app */;
 			productType = "com.apple.product-type.application";
@@ -189,6 +199,9 @@
 				Base,
 			);
 			mainGroup = BD8FDC662DFCAE9D00AA055A;
+			packageReferences = (
+				8B0A03AE2E218763007F2578 /* XCRemoteSwiftPackageReference "sdk-for-apple" */,
+			);
 			productRefGroup = BD8FDC702DFCAE9E00AA055A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -224,6 +237,7 @@
 				BDF557212E05E80500D062A8 /* ComicChapterView.swift in Sources */,
 				8BB8216F2DFCB124003D575E /* Home.swift in Sources */,
 				8BB821712DFCB131003D575E /* Search.swift in Sources */,
+				8B0A03B32E218891007F2578 /* Appwrite.swift in Sources */,
 				BDF5571D2E05E71C00D062A8 /* LeaderboardRow.swift in Sources */,
 				BD8CC5ED2DFCB7870069C53C /* User.swift in Sources */,
 				8BB821792DFCB16E003D575E /* Detail.swift in Sources */,
@@ -370,9 +384,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ByakuReader/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ByakuReader/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -398,9 +412,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ByakuReader/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ByakuReader/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -438,6 +452,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B0A03AE2E218763007F2578 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B0A03AF2E218763007F2578 /* Appwrite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B0A03AE2E218763007F2578 /* XCRemoteSwiftPackageReference "sdk-for-apple" */;
+			productName = Appwrite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BD8FDC672DFCAE9D00AA055A /* Project object */;
 }

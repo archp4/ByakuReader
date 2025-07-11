@@ -117,7 +117,6 @@ struct Home: View {
                             HomeRowView(title: category, comics: comicCategories[category]!, itemWidth: 150, itemHeight: 225)
                         }
                     }
-                    .padding(.vertical) // Add some vertical padding to the VStack for better spacing
                 }
                 
             } // VStack
