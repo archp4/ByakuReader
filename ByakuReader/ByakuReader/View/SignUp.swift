@@ -16,7 +16,6 @@ struct SignUp: View {
     @State var password: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
-    @EnvironmentObject var user : User
     var body: some View {
         NavigationStack{
             TextField("Enter Name",text: $username)
@@ -29,11 +28,11 @@ struct SignUp: View {
                 .padding()
             Button("Sign Up"){
                 Task{
-                    if email.isEmpty || password.isEmpty {
+                    if email.isEmpty || password.isEmpty || username.isEmpty {
                         alertMessage = "Please enter both email and password."
                         showAlert = true
                     } else {
-                        let value = await appwrite.onRegister(email, password)
+                        let value = await appwrite.onRegister(email: email, password: password, name: username)
                         if value {
                             alertMessage = "Account Created, You can Login now"
                             showAlert = true
@@ -63,5 +62,5 @@ struct SignUp: View {
 
 
 #Preview {
-    SignUp(authFlow:.constant(.signUp)).environmentObject(User())
+    SignUp(authFlow:.constant(.signUp))
 }

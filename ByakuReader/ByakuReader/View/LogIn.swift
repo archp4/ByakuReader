@@ -14,8 +14,6 @@ struct LogIn: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     let appwrite = Appwrite()
-    
-    @EnvironmentObject var user : User
     var body: some View {
         NavigationStack{
             TextField("Enter Email",text: $email)
@@ -55,5 +53,5 @@ struct LogIn: View {
 }
 
 #Preview {
-    LogIn(authFlow:.constant(.signIn)).environmentObject(User())
+    LogIn(authFlow:.constant(.signIn))
 }

@@ -2,9 +2,18 @@ import Foundation
 import Appwrite
 import JSONCodable
 
-class Appwrite {
+class AppwriteManager {
+    
+    static let shared = AppwriteManager()
     var client: Client
     var account: Account
+    var databaseID : String = "6840da45001fbb9d0a48"
+    var reading_progress : String = "688d2c84001277be7858"
+    var user_comic_lists : String = "688d2c34000c11339ed9"
+    var comic_engagements : String = "688d2b03002c40b6475b"
+    var chapters : String = "688d2c34000c11339ed9"
+    var comics_details : String = "688d2c34000c11339ed9"
+    var users : String = "6840da8b002018e7799b"
     
     public init() {
         self.client = Client()
@@ -14,10 +23,7 @@ class Appwrite {
         self.account = Account(client)
     }
     
-    public func onRegister(
-            _ email: String,
-            _ password: String
-        ) async -> Bool {
+    public func onRegister(email: String, password: String, name: String) async -> Bool {
             do {
                 print("This is your \(email)")
                 _ = try await account.create(
@@ -25,16 +31,17 @@ class Appwrite {
                     email: email,
                     password: password
                 )
-                return true // Return true if registration is successful
+                return true
             } catch let error as AppwriteError {
                 print("Registration failed with Appwrite error: \(error.message)")
                 return false
             }
             catch {
                 print("Registration failed with error: \(error)")
-                return false // Return false if registration fails
+                return false
             }
         }
+    
         
     
     public func onLogin(
@@ -58,6 +65,114 @@ class Appwrite {
             sessionId: "current"
         )
     }
-    
-}
 
+    func getUser() async throws -> UserModel {
+        let appwriteUser = try await account.get()
+        return UserModel(
+            id: appwriteUser.id,
+            name: appwriteUser.name,
+            email: appwriteUser.email
+        )
+    }
+
+
+
+    func fetchComics(completion: @escaping (Result<[Comic], Error>) -> Void) {
+        let db = Databases(client)
+        
+        Task {
+            do {
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: comics_details,
+                    queries: []
+                )
+                let comics: [Comic] = try response.documents.compactMap { document in
+                    let dict = document.data.mapValues { $0.value } // [String: Any]
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict)
+                    return try JSONDecoder().decode(Comic.self, from: jsonData)
+                }
+                completion(.success(comics))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    
+    func fetchTreadingComics(completion: @escaping (Result<[Comic], Error>) -> Void) {
+        let db = Databases(client)
+        
+        Task {
+            do {
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: comics_details,
+                    queries: [
+                        Query.limit(10)
+                    ]
+                )
+                let comics: [Comic] = try response.documents.compactMap { document in
+                    let dict = document.data.mapValues { $0.value } // [String: Any]
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict)
+                    return try JSONDecoder().decode(Comic.self, from: jsonData)
+                }
+                completion(.success(comics))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getComicsByIds(_ ids: [String], completion: @escaping (Result<[Comic], Error>) -> Void) {
+        let db = Databases(client)
+        Task {
+            do {
+                let queries = [
+                    Query.equal("id", value: ids)
+                ]
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: comics_details,
+                    queries: queries
+                )
+                let comics: [Comic] = try response.documents.compactMap { document in
+                    let dict = document.data.mapValues { $0.value }
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict)
+                    return try JSONDecoder().decode(Comic.self, from: jsonData)
+                }
+                completion(.success(comics))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    func fetchChapters(forComicId comicId: String, completion: @escaping (Result<[ChapterModel], Error>) -> Void) {
+        let db = Databases(client)
+        
+        Task {
+            do {
+                let queries = [
+                    Query.equal("comicId", value: comicId)
+                ]
+    
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: chapters,
+                    queries: queries
+                )
+                
+                let chapters: [ChapterModel] = try response.documents.compactMap { document in
+                    let dict = document.data.mapValues { $0.value }
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict)
+                    return try JSONDecoder().decode(ChapterModel.self, from: jsonData)
+                }
+                
+                completion(.success(chapters))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+}
