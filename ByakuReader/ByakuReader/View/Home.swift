@@ -14,6 +14,10 @@ struct Home: View {
     @State var password: String = ""
     @EnvironmentObject var user : User
     @State var searchText : String = ""
+    @State private var showingLogoutAlert = false
+    
+    let appwrite = Appwrite()
+    
     let comicCategories: [String: [Comic]] = [
         "Trending Now": [
             Comic(
@@ -38,7 +42,7 @@ struct Home: View {
             ),
             Comic(
                 title: "Cyberpunk Alley",
-                subtitle: "Where Code Meets Crime", 
+                subtitle: "Where Code Meets Crime",
                 author: ["D. Jax", "E. Quinn"],
                 genre: ["Cyberpunk", "Thriller"],
                 description: "In a neon-drenched future, a lone hacker uncovers a vast conspiracy.",
@@ -127,10 +131,26 @@ struct Home: View {
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
                     Button{
-                        authFlow = .signIn
+                        showingLogoutAlert = true
                     } label: {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                     } // button
+                    .alert("Logout", isPresented: $showingLogoutAlert) {
+                        Button("Cancel", role: .cancel) {}
+                        Button("Logout", role: .destructive) {
+                            Task {
+                                do {
+                                    try await appwrite.onLogout()
+                                    authFlow = .signIn
+                                    print("Logout Done")
+                                } catch {
+                                    print(error)
+                                }
+                            }
+                        }
+                    } message: {
+                        Text("Are you sure you want to log out?")
+                    }
                 }// toolbar item 1
                 
                 ToolbarItem(placement: .topBarLeading){
