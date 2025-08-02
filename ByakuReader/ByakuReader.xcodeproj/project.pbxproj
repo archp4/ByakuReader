@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B4D81E12E05D6F900E593F3 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D81E02E05D6F900E593F3 /* Comic.swift */; };
 		8B4D81E32E05DA7D00E593F3 /* HomeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4D81E22E05DA7D00E593F3 /* HomeRowView.swift */; };
 		8BB8216B2DFCB103003D575E /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8216A2DFCB103003D575E /* LogIn.swift */; };
 		8BB8216D2DFCB118003D575E /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8216C2DFCB118003D575E /* SignUp.swift */; };
@@ -19,7 +18,6 @@
 		8BB821792DFCB16E003D575E /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB821782DFCB16E003D575E /* Detail.swift */; };
 		8BB8217B2DFCB179003D575E /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8217A2DFCB179003D575E /* Chapter.swift */; };
 		8BF50A942E02079F008F8BD8 /* MediumComicTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */; };
-		BD8CC5ED2DFCB7870069C53C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8CC5EC2DFCB7870069C53C /* User.swift */; };
 		BD8D93AD2E2187B600206206 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = BD8D93AC2E2187B600206206 /* Appwrite */; };
 		BD8D93B02E2188D600206206 /* Appwrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8D93AF2E2188D600206206 /* Appwrite.swift */; };
 		BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC722DFCAE9E00AA055A /* ByakuReaderApp.swift */; };
@@ -28,13 +26,13 @@
 		BD8FDC7A2DFCAEB500AA055A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD8FDC792DFCAEB500AA055A /* Preview Assets.xcassets */; };
 		BD8FDC812DFCAFFE00AA055A /* AuthViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */; };
 		BD8FDC832DFCB12B00AA055A /* HomeViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */; };
+		BDE77EB52E3D66930097BEE6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE77EB42E3D66930097BEE6 /* Model.swift */; };
 		BDF5571D2E05E71C00D062A8 /* LeaderboardRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5571C2E05E71C00D062A8 /* LeaderboardRow.swift */; };
 		BDF5571F2E05E79B00D062A8 /* LeaderboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF5571E2E05E79B00D062A8 /* LeaderboardItem.swift */; };
 		BDF557212E05E80500D062A8 /* ComicChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF557202E05E80500D062A8 /* ComicChapterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B4D81E02E05D6F900E593F3 /* Comic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comic.swift; sourceTree = "<group>"; };
 		8B4D81E22E05DA7D00E593F3 /* HomeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRowView.swift; sourceTree = "<group>"; };
 		8BB8216A2DFCB103003D575E /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		8BB8216C2DFCB118003D575E /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
@@ -46,7 +44,6 @@
 		8BB821782DFCB16E003D575E /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		8BB8217A2DFCB179003D575E /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		8BF50A932E02079F008F8BD8 /* MediumComicTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumComicTile.swift; sourceTree = "<group>"; };
-		BD8CC5EC2DFCB7870069C53C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BD8D93AE2E2187E600206206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BD8D93AF2E2188D600206206 /* Appwrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appwrite.swift; sourceTree = "<group>"; };
 		BD8FDC6F2DFCAE9E00AA055A /* ByakuReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByakuReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +53,7 @@
 		BD8FDC792DFCAEB500AA055A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BD8FDC802DFCAFFE00AA055A /* AuthViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewManager.swift; sourceTree = "<group>"; };
 		BD8FDC822DFCB12B00AA055A /* HomeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewManager.swift; sourceTree = "<group>"; };
+		BDE77EB42E3D66930097BEE6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BDF5571C2E05E71C00D062A8 /* LeaderboardRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardRow.swift; sourceTree = "<group>"; };
 		BDF5571E2E05E79B00D062A8 /* LeaderboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardItem.swift; sourceTree = "<group>"; };
 		BDF557202E05E80500D062A8 /* ComicChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicChapterView.swift; sourceTree = "<group>"; };
@@ -94,9 +92,8 @@
 		8BF50A902E01F94A008F8BD8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BD8CC5EC2DFCB7870069C53C /* User.swift */,
-				8B4D81E02E05D6F900E593F3 /* Comic.swift */,
 				BDF5571E2E05E79B00D062A8 /* LeaderboardItem.swift */,
+				BDE77EB42E3D66930097BEE6 /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,7 +226,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD8FDC752DFCAE9E00AA055A /* ContentView.swift in Sources */,
-				8B4D81E12E05D6F900E593F3 /* Comic.swift in Sources */,
 				8BB821752DFCB151003D575E /* Profile.swift in Sources */,
 				8BF50A942E02079F008F8BD8 /* MediumComicTile.swift in Sources */,
 				8BB821732DFCB145003D575E /* Favorite.swift in Sources */,
@@ -239,7 +235,6 @@
 				8BB821712DFCB131003D575E /* Search.swift in Sources */,
 				BD8D93B02E2188D600206206 /* Appwrite.swift in Sources */,
 				BDF5571D2E05E71C00D062A8 /* LeaderboardRow.swift in Sources */,
-				BD8CC5ED2DFCB7870069C53C /* User.swift in Sources */,
 				8BB821792DFCB16E003D575E /* Detail.swift in Sources */,
 				BDF5571F2E05E79B00D062A8 /* LeaderboardItem.swift in Sources */,
 				8BB8216B2DFCB103003D575E /* LogIn.swift in Sources */,
@@ -247,6 +242,7 @@
 				8B4D81E32E05DA7D00E593F3 /* HomeRowView.swift in Sources */,
 				BD8FDC732DFCAE9E00AA055A /* ByakuReaderApp.swift in Sources */,
 				8BB8217B2DFCB179003D575E /* Chapter.swift in Sources */,
+				BDE77EB52E3D66930097BEE6 /* Model.swift in Sources */,
 				BD8FDC812DFCAFFE00AA055A /* AuthViewManager.swift in Sources */,
 				BD8FDC832DFCB12B00AA055A /* HomeViewManager.swift in Sources */,
 			);

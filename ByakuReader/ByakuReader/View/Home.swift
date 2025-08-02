@@ -7,165 +7,88 @@
 
 import SwiftUI
 
-struct Home: View {
+struct HomeView: View {
     
-    @Binding var authFlow: AuthViewManager
-    @State var email: String = ""
-    @State var password: String = ""
-    @EnvironmentObject var user : User
-    @State var searchText : String = ""
-    @State private var showingLogoutAlert = false
+    @State private var trendingComics: [Comic] = []
+    @State private var continueReadingComics: [Comic] = []
+    @State private var myListComics: [Comic] = []
     
-    let appwrite = Appwrite()
-    
-    let comicCategories: [String: [Comic]] = [
-        "Trending Now": [
-            Comic(
-                title: "Galactic Guardians",
-                subtitle: "The Universe's Last Hope",
-                author: ["A. Nova", "B. Thorne"],
-                genre: ["Sci-Fi", "Action"],
-                description: "A team of unlikely heroes defends the galaxy from cosmic threats.",
-                imageID: "https://picsum.photos/id/200/200/300",
-                isComplete: false,
-                chapter: 12
-            ),
-            Comic(
-                title: "Mystic Realm",
-                // No subtitle for this one, it will default to nil
-                author: ["C. Lunar"],
-                genre: ["Fantasy", "Adventure"],
-                description: "Journey into a world of magic, mythical creatures, and ancient prophecies.",
-                imageID: "https://picsum.photos/id/201/200/300",
-                isComplete: true,
-                chapter: 50
-            ),
-            Comic(
-                title: "Cyberpunk Alley",
-                subtitle: "Where Code Meets Crime",
-                author: ["D. Jax", "E. Quinn"],
-                genre: ["Cyberpunk", "Thriller"],
-                description: "In a neon-drenched future, a lone hacker uncovers a vast conspiracy.",
-                imageID: "https://picsum.photos/id/202/200/300",
-                isComplete: false,
-                chapter: 8
-            )
-        ],
-        "Continue Reading": [
-            Comic(
-                title: "Dragon's Breath",
-                subtitle: "A Tale of Fire and Fate",
-                author: ["F. Stone"],
-                genre: ["Fantasy", "Drama"],
-                description: "A young dragon learns to harness its power while navigating a world that fears it.",
-                imageID: "https://picsum.photos/id/203/200/300",
-                isComplete: false,
-                chapter: 25
-            ),
-            Comic(
-                title: "Vigilante Squad",
-                author: ["G. Blade"],
-                genre: ["Action", "Crime"],
-                description: "A group of masked vigilantes takes justice into their own hands.",
-                imageID: "https://picsum.photos/id/204/200/300",
-                isComplete: false,
-                chapter: 7
-            )
-        ],
-        "My List": [
-            Comic(
-                title: "The Last Sorcerer",
-                author: ["H. Wren"],
-                genre: ["Fantasy", "Mystery"],
-                description: "The last remaining sorcerer seeks answers about a forgotten past.",
-                imageID: "https://picsum.photos/id/205/200/300",
-                isComplete: true,
-                chapter: 30
-            ),
-            Comic(
-                title: "Space Pirates",
-                author: ["I. Rook"],
-                genre: ["Sci-Fi", "Comedy"],
-                description: "A comedic tale of a ragtag crew of space pirates and their misadventures.",
-                imageID: "https://picsum.photos/id/206/200/300",
-                isComplete: false,
-                chapter: 15
-            ),
-            Comic(
-                title: "Echoes of Time",
-                author: ["J. Verse"],
-                genre: ["Historical", "Supernatural"],
-                description: "A young woman discovers she can communicate with historical figures.",
-                imageID: "https://picsum.photos/id/207/200/300",
-                isComplete: false,
-                chapter: 9
-            )
-        ]
-    ]
-    private let title = [
-        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria"
-    ]
-    
-    private var searchResults : [String] {
-        searchText.isEmpty ? title : title.filter { $0.contains(searchText) }
-    }
+    private let itemWidth: CGFloat = 150
+    private let itemHeight: CGFloat = 225
     
     var body: some View {
-        
-        NavigationView{
-            VStack{
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 20) {
-                        ForEach(comicCategories.keys.sorted(), id: \.self) { category in
-                            // Pass the category title and the array of Comics for that category
-                            HomeRowView(title: category, comics: comicCategories[category]!, itemWidth: 150, itemHeight: 225)
-                        }
+        NavigationStack {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 20) {
+                    if !trendingComics.isEmpty {
+                        HomeRowView(
+                            title: "Trending Now",
+                            comics: trendingComics,
+                            itemWidth: itemWidth,
+                            itemHeight: itemHeight
+                        )
                     }
-                    .padding(.vertical) // Add some vertical padding to the VStack for better spacing
+                    if !continueReadingComics.isEmpty {
+                        HomeRowView(
+                            title: "Continue Reading",
+                            comics: continueReadingComics,
+                            itemWidth: itemWidth,
+                            itemHeight: itemHeight
+                        )
+                    }
+                    if !myListComics.isEmpty {
+                        HomeRowView(
+                            title: "My List",
+                            comics: myListComics,
+                            itemWidth: itemWidth,
+                            itemHeight: itemHeight
+                        )
+                    }
+                    if trendingComics.isEmpty && continueReadingComics.isEmpty && myListComics.isEmpty {
+                        Text("Loading your comics…")
+                            .foregroundColor(.gray)
+                            .padding()
+                    }
                 }
-                
-            } // VStack
-            .searchable(text: $searchText)
+                .padding(.vertical)
+            }
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .topBarTrailing){
-                    Button{
-                        showingLogoutAlert = true
-                    } label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
-                    } // button
-                    .alert("Logout", isPresented: $showingLogoutAlert) {
-                        Button("Cancel", role: .cancel) {}
-                        Button("Logout", role: .destructive) {
-                            Task {
-                                do {
-                                    try await appwrite.onLogout()
-                                    authFlow = .signIn
-                                    print("Logout Done")
-                                } catch {
-                                    print(error)
-                                }
-                            }
-                        }
-                    } message: {
-                        Text("Are you sure you want to log out?")
-                    }
-                }// toolbar item 1
+            .task {
                 
-                ToolbarItem(placement: .topBarLeading){
-                    Button{
-                        
-                    } label: {
-                        Image(systemName: "person")
-                            .frame(width: 40, height: 40)
-                    }
-                }// toolbar item 2
-            }// tool bar
-        } // navigation stack
-    } // body
-} // home
+                await loadAllSections()
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    private func loadAllSections() async {
+        AppwriteManager.shared.f { result in
+            switch result {
+                case .success(let comics): trendingComics = comics
+                case .failure(let err): print("Trending error:", err)
+            }
+        }
+        
+        AppwriteManager.shared.fetchContinueReading(for: user.id) { result in
+            switch result {
+                case .success(let comics): continueReadingComics = comics
+                case .failure(let err): print("Continue Reading error:", err)
+            }
+        }
 
-#Preview {
-    Home(authFlow : .constant(.home)).environmentObject(User())
+        AppwriteManager.shared.fetchMyList(for: user.id ) {
+            result in
+            switch result {
+                case .success(let comics): myListComics = comics
+                case .failure(let err): print("My List error:", err)
+            }
+            
+        }
+        
+    }
+    
 }

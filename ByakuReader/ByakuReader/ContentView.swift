@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State var authFlow: AuthViewManager =  .signIn
-    @StateObject var user : User = User()
     var body: some View {
         switch authFlow {
         case .signUp:
-            SignUp(authFlow: $authFlow).environmentObject(user)
+            SignUp(authFlow: $authFlow)
         case .signIn:
-            LogIn(authFlow: $authFlow).environmentObject(user)
+            LogIn(authFlow: $authFlow)
         case .home:
-            HomeViewManager(authFlow: $authFlow).environmentObject(user)
+            HomeViewManager(authFlow: $authFlow)
         }
     }
 }
