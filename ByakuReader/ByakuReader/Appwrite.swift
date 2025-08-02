@@ -12,7 +12,7 @@ class AppwriteManager {
     var user_comic_lists : String = "688d2c34000c11339ed9"
     var comic_engagements : String = "688d2b03002c40b6475b"
     var chapters : String = "688d2c34000c11339ed9"
-    var comics_details : String = "688d2c34000c11339ed9"
+    var comics_details : String = "68419d90001f3f73b9d3"
     var users : String = "6840da8b002018e7799b"
     
     public init() {
@@ -84,8 +84,7 @@ class AppwriteManager {
             do {
                 let response = try await db.listDocuments(
                     databaseId: databaseID,
-                    collectionId: comics_details,
-                    queries: []
+                    collectionId: comics_details
                 )
                 let comics: [Comic] = try response.documents.compactMap { document in
                     let dict = document.data.mapValues { $0.value } // [String: Any]
@@ -150,6 +149,10 @@ class AppwriteManager {
     
     func fetchContinueReading(forUserId userId: String, completion: @escaping (Result<[ReadingProgress], Error>) -> Void) {
         let db = Databases(client)
+        guard !userId.isEmpty else {
+                completion(.failure(NSError(domain: "InvalidUserID", code: 400, userInfo: [NSLocalizedDescriptionKey: "User ID is empty."])))
+                return
+            }
 
         Task {
             do {
@@ -187,7 +190,7 @@ class AppwriteManager {
                 let listResponse = try await db.listDocuments(
                     databaseId: databaseID,
                     collectionId: user_comic_lists,
-                    queries: [Query.equal("userId",value: userId)]
+                    queries: [Query.equal("userId", value: [userId])]
                 )
                 let userList = try listResponse.documents.compactMap { doc -> UserComicList? in
                     let data = doc.data.mapValues { $0.value }

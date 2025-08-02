@@ -78,16 +78,33 @@ struct Home: View {
     }
     private func loadAllSections() async {
         do {
-            let user = try await AppwriteManager.shared.getUser()
-            AppwriteManager.shared.fetchUserComics(userId: user.id){ result in
+//            AppwriteManager.shared.fetchUserComics(userId: "688d22220e878e1dcf77"){ result in
+//                DispatchQueue.main.async {
+//                    switch result {
+//                    case .success(let data):
+//                        if data.continueReading.count > 0 {
+//                            self.continueReadingComics = data.continueReading
+//                        }
+//                        if data.myList.count > 0 {
+//                            self.myListComics = data.myList
+//                        }
+//                        self.trendingComics = data.treading
+//                    case .failure(let error):
+//                        print("Failed to load user comics:", error)
+//                    }
+//                }
+//            }
+            
+            AppwriteManager.shared.fetchComics { result in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success(let data):
-                        self.continueReadingComics = data.continueReading
-                        self.myListComics = data.myList
-                        self.trendingComics = data.treading
+                    case .success(let comics):
+                        print(comics.count)
+                        self.myListComics = comics
+                        self.continueReadingComics = comics
+                        self.trendingComics = comics
                     case .failure(let error):
-                        print("Failed to load user comics:", error)
+                        print("Failed to load comics:", error)
                     }
                 }
             }

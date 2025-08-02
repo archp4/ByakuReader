@@ -56,9 +56,9 @@ struct LeaderboardView: View {
             }
             .navigationTitle("Leaderboard")
             .navigationBarTitleDisplayMode(.large)
-            .navigationDestination(isPresented: $showDetail) {
-                Detail()
-            }
+//            .navigationDestination(isPresented: $showDetail) {
+//                Detail(com)
+//            }
         }
     }
 }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var authFlow: AuthViewManager =  .signIn
+    @State var authFlow: AuthViewManager =  .home
+    
     var body: some View {
         switch authFlow {
         case .signUp:

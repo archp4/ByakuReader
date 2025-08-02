@@ -146,23 +146,23 @@ struct Comic: Identifiable, Codable {
     var author: [String]
     var genre: [String]
     var description: String
-    var imageID: String
+    var imageId: String
     var isComplete: Bool
     var chapter: Int
     
     enum CodingKeys: String, CodingKey {
         case id = "$id"
-        case title, subtitle, author, genre, description, imageID, isComplete, chapter
+        case title, subtitle, author, genre, description, imageId, isComplete, chapter
     }
     
-    init(id: String, title: String, subtitle: String? = nil, author: [String], genre: [String], description: String, imageID: String, isComplete: Bool, chapter: Int) {
+    init(id: String, title: String, subtitle: String? = nil, author: [String], genre: [String], description: String, imageId: String, isComplete: Bool, chapter: Int) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
         self.author = author
         self.genre = genre
         self.description = description
-        self.imageID = imageID
+        self.imageId = imageId
         self.isComplete = isComplete
         self.chapter = chapter
     }
@@ -175,7 +175,7 @@ struct Comic: Identifiable, Codable {
         author = try container.decode([String].self, forKey: .author)
         genre = try container.decode([String].self, forKey: .genre)
         description = try container.decode(String.self, forKey: .description)
-        imageID = try container.decode(String.self, forKey: .imageID)
+        imageId = try container.decode(String.self, forKey: .imageId)
         isComplete = try container.decode(Bool.self, forKey: .isComplete)
         chapter = try container.decode(Int.self, forKey: .chapter)
     }
@@ -188,7 +188,7 @@ struct Comic: Identifiable, Codable {
         try container.encode(author, forKey: .author)
         try container.encode(genre, forKey: .genre)
         try container.encode(description, forKey: .description)
-        try container.encode(imageID, forKey: .imageID)
+        try container.encode(imageId, forKey: .imageId)
         try container.encode(isComplete, forKey: .isComplete)
         try container.encode(chapter, forKey: .chapter)
     }
