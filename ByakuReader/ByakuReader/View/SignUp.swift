@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignUp: View {
     @Binding var authFlow: AuthViewManager
-    let appwrite = Appwrite()
+    let appwrite = AppwriteManager.shared
     @State var email: String = ""
     @State var username: String = ""
     @State var confirmPassword: String = ""

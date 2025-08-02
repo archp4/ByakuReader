@@ -11,9 +11,9 @@ struct Favorite : View {
     @State var searchText : String = ""
     
     // Flattened array of all favorite comics
-    let allFavoriteComics: [Comic] = [
+    @State var allFavoriteComics : [Comic]!/* = [
         Comic(
-            title: "Shadow Weavers",
+            id: String, title: "Shadow Weavers",
             subtitle: "The Ancient Prophecy",
             author: ["K. Blackwood"],
             genre: ["Fantasy", "Mystery"],
@@ -79,7 +79,7 @@ struct Favorite : View {
             isComplete: true,
             chapter: 60
         )
-    ]
+    ]*/
     
     // You might want to filter these based on search text later
     var filteredComics: [Comic] {

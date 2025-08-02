@@ -194,33 +194,7 @@ struct Comic: Identifiable, Codable {
     }
 }
 
-func fetchChapters(forComicId comicId: String, completion: @escaping (Result<[Chapter], Error>) -> Void) {
-    let db = Databases(client)
-    
-    Task {
-        do {
-            let queries = [
-                Query.equal("comicId", comicId)
-            ]
-            
-            let response = try await db.listDocuments(
-                databaseId: databaseID,
-                collectionId: chaptersCollectionID,
-                queries: queries
-            )
-            
-            let chapters: [Chapter] = try response.documents.compactMap { document in
-                let dict = document.data.mapValues { $0.value }
-                let jsonData = try JSONSerialization.data(withJSONObject: dict)
-                return try JSONDecoder().decode(Chapter.self, from: jsonData)
-            }
-            
-            completion(.success(chapters))
-        } catch {
-            completion(.failure(error))
-        }
-    }
-}
+
 
 
 struct ReadingProgress: Identifiable, Codable {
