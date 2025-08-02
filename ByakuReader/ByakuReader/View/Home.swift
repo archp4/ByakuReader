@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct Home: View {
     
+    @Binding var authFlow: AuthViewManager
     @State private var trendingComics: [Comic] = []
     @State private var continueReadingComics: [Comic] = []
     @State private var myListComics: [Comic] = []
@@ -55,40 +56,47 @@ struct HomeView: View {
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
             .task {
-                
                 await loadAllSections()
-                
-            }
-            
+            }.toolbar{
+                ToolbarItem(placement: .topBarTrailing){
+                    Button{
+                        authFlow = .signIn
+                    } label: {
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                    } // button
+                }// toolbar item 1
+                ToolbarItem(placement: .topBarLeading){
+                    Button{
+                        
+                    } label: {
+                        Image(systemName: "person")
+                            .frame(width: 40, height: 40)
+                    }
+                }// toolbar item 2
+            }// tool bar
         }
-        
     }
-    
-    
     private func loadAllSections() async {
-        AppwriteManager.shared.f { result in
-            switch result {
-                case .success(let comics): trendingComics = comics
-                case .failure(let err): print("Trending error:", err)
+        do {
+            let user = try await AppwriteManager.shared.getUser()
+            AppwriteManager.shared.fetchUserComics(userId: user.id){ result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        self.continueReadingComics = data.continueReading
+                        self.myListComics = data.myList
+                        self.trendingComics = data.treading
+                    case .failure(let error):
+                        print("Failed to load user comics:", error)
+                    }
+                }
             }
+        } catch {
+            print(error)
         }
-        
-        AppwriteManager.shared.fetchContinueReading(for: user.id) { result in
-            switch result {
-                case .success(let comics): continueReadingComics = comics
-                case .failure(let err): print("Continue Reading error:", err)
-            }
-        }
-
-        AppwriteManager.shared.fetchMyList(for: user.id ) {
-            result in
-            switch result {
-                case .success(let comics): myListComics = comics
-                case .failure(let err): print("My List error:", err)
-            }
-            
-        }
-        
     }
     
+}
+#Preview {
+    Home(authFlow : .constant(.home))
 }

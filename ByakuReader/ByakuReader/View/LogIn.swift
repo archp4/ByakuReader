@@ -13,7 +13,7 @@ struct LogIn: View {
     @State var password: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
-    let appwrite = Appwrite()
+    let appwrite = AppwriteManager()
     var body: some View {
         NavigationStack{
             TextField("Enter Email",text: $email)

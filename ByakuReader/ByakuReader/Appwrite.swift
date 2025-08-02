@@ -147,6 +147,101 @@ class AppwriteManager {
             }
         }
     }
+    
+    func fetchContinueReading(forUserId userId: String, completion: @escaping (Result<[ReadingProgress], Error>) -> Void) {
+        let db = Databases(client)
+
+        Task {
+            do {
+                let queries = [
+                    Query.equal("userId", value: userId),
+                    Query.orderDesc("lastReadAt")
+                ]
+                
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: reading_progress,
+                    queries: queries
+                )
+                
+                let progressList: [ReadingProgress] = try response.documents.compactMap { doc in
+                    let data = doc.data.mapValues { $0.value }
+                    let jsonData = try JSONSerialization.data(withJSONObject: data)
+                    return try JSONDecoder().decode(ReadingProgress.self, from: jsonData)
+                }
+
+                completion(.success(progressList))
+            } catch {
+                print("Failed to fetch continue reading:", error)
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchUserComics(userId: String, completion: @escaping (Result<(continueReading: [Comic], myList: [Comic], treading: [Comic]), Error>) -> Void) {
+        let db = Databases(client)
+
+        Task {
+            do {
+                // --- Fetch UserComicList ---
+                let listResponse = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: user_comic_lists,
+                    queries: [Query.equal("userId",value: userId)]
+                )
+                let userList = try listResponse.documents.compactMap { doc -> UserComicList? in
+                    let data = doc.data.mapValues { $0.value }
+                    let json = try JSONSerialization.data(withJSONObject: data)
+                    return try JSONDecoder().decode(UserComicList.self, from: json)
+                }
+                let myListIds = userList.map { $0.comicId }
+
+                let progressResponse = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: reading_progress,
+                    queries: [Query.equal("userId",value:  userId)]
+                )
+                let progressList = try progressResponse.documents.compactMap { doc -> ReadingProgress? in
+                    let data = doc.data.mapValues { $0.value }
+                    let json = try JSONSerialization.data(withJSONObject: data)
+                    return try JSONDecoder().decode(ReadingProgress.self, from: json)
+                }
+                let progressComicIds = progressList.map { $0.comicId }
+                
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: comics_details,
+                    queries: [
+                        Query.limit(10)
+                    ]
+                )
+                let comics: [Comic] = try response.documents.compactMap { document in
+                    let dict = document.data.mapValues { $0.value } // [String: Any]
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict)
+                    return try JSONDecoder().decode(Comic.self, from: jsonData)
+                }
+
+                // --- Fetch Comics for both lists ---
+                let allIds = Array(Set(myListIds + progressComicIds)) // deduped union
+                getComicsByIds(allIds) { result in
+                    switch result {
+                    case .success(let comics):
+                        let continueReading = comics.filter { progressComicIds.contains($0.id) }
+                        let myList = comics.filter { myListIds.contains($0.id) }
+                        completion(.success((continueReading: continueReading, myList: myList, treading: comics)))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
+            } catch {
+                print("Error fetching user comics:", error)
+                completion(.failure(error))
+            }
+        }
+    }
+
+
+    
     func fetchChapters(forComicId comicId: String, completion: @escaping (Result<[ChapterModel], Error>) -> Void) {
         let db = Databases(client)
         

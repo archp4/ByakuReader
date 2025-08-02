@@ -12,73 +12,73 @@ struct Favorite : View {
     
     // Flattened array of all favorite comics
     let allFavoriteComics: [Comic] = [
-        Comic(
-            title: "Shadow Weavers",
-            subtitle: "The Ancient Prophecy",
-            author: ["K. Blackwood"],
-            genre: ["Fantasy", "Mystery"],
-            description: "A secret society of mages fights to protect the world from dark magic.",
-            imageID: "https://picsum.photos/id/208/200/300",
-            isComplete: false,
-            chapter: 18
-        ),
-        Comic(
-            title: "Neon Nexus",
-            subtitle: "City of Dreams and Danger",
-            author: ["L. Jett"],
-            genre: ["Cyberpunk", "Action"],
-            description: "In a sprawling futuristic city, a street-level detective uncovers a vast conspiracy.",
-            imageID: "https://picsum.photos/id/209/200/300",
-            isComplete: false,
-            chapter: 10
-        ),
-        Comic(
-            title: "Crimson Tide",
-            author: ["M. Vanguard"],
-            genre: ["Horror", "Thriller"],
-            description: "A chilling tale of a remote island haunted by a vengeful spirit.",
-            imageID: "https://picsum.photos/id/210/200/300",
-            isComplete: true,
-            chapter: 22
-        ),
-        Comic(
-            title: "Starborne Legends",
-            subtitle: "Journey Through the Cosmos",
-            author: ["N. Stardust"],
-            genre: ["Sci-Fi", "Adventure"],
-            description: "Explorers venture into unknown galaxies to discover ancient civilizations.",
-            imageID: "https://picsum.photos/id/211/200/300",
-            isComplete: false,
-            chapter: 3
-        ),
-        Comic(
-            title: "The Gilded Age",
-            author: ["O. Pennyworth"],
-            genre: ["Historical", "Drama"],
-            description: "A captivating look into the lives of a wealthy family during a transformative era.",
-            imageID: "https://picsum.photos/id/212/200/300",
-            isComplete: true,
-            chapter: 45
-        ),
-        Comic(
-            title: "Whispers of the Wild",
-            subtitle: "Nature's Untold Stories",
-            author: ["P. Green"],
-            genre: ["Adventure", "Fantasy"],
-            description: "A young druid connects with the ancient spirits of the forest to save their home.",
-            imageID: "https://picsum.photos/id/213/200/300",
-            isComplete: true,
-            chapter: 35
-        ),
-        Comic(
-            title: "The Silicon Soul",
-            author: ["Q. Byte"],
-            genre: ["Sci-Fi", "Philosophy"],
-            description: "An AI gains sentience and questions the nature of its existence.",
-            imageID: "https://picsum.photos/id/214/200/300",
-            isComplete: true,
-            chapter: 60
-        )
+//        Comic(
+//            title: "Shadow Weavers",
+//            subtitle: "The Ancient Prophecy",
+//            author: ["K. Blackwood"],
+//            genre: ["Fantasy", "Mystery"],
+//            description: "A secret society of mages fights to protect the world from dark magic.",
+//            imageID: "https://picsum.photos/id/208/200/300",
+//            isComplete: false,
+//            chapter: 18
+//        ),
+//        Comic(
+//            title: "Neon Nexus",
+//            subtitle: "City of Dreams and Danger",
+//            author: ["L. Jett"],
+//            genre: ["Cyberpunk", "Action"],
+//            description: "In a sprawling futuristic city, a street-level detective uncovers a vast conspiracy.",
+//            imageID: "https://picsum.photos/id/209/200/300",
+//            isComplete: false,
+//            chapter: 10
+//        ),
+//        Comic(
+//            title: "Crimson Tide",
+//            author: ["M. Vanguard"],
+//            genre: ["Horror", "Thriller"],
+//            description: "A chilling tale of a remote island haunted by a vengeful spirit.",
+//            imageID: "https://picsum.photos/id/210/200/300",
+//            isComplete: true,
+//            chapter: 22
+//        ),
+//        Comic(
+//            title: "Starborne Legends",
+//            subtitle: "Journey Through the Cosmos",
+//            author: ["N. Stardust"],
+//            genre: ["Sci-Fi", "Adventure"],
+//            description: "Explorers venture into unknown galaxies to discover ancient civilizations.",
+//            imageID: "https://picsum.photos/id/211/200/300",
+//            isComplete: false,
+//            chapter: 3
+//        ),
+//        Comic(
+//            title: "The Gilded Age",
+//            author: ["O. Pennyworth"],
+//            genre: ["Historical", "Drama"],
+//            description: "A captivating look into the lives of a wealthy family during a transformative era.",
+//            imageID: "https://picsum.photos/id/212/200/300",
+//            isComplete: true,
+//            chapter: 45
+//        ),
+//        Comic(
+//            title: "Whispers of the Wild",
+//            subtitle: "Nature's Untold Stories",
+//            author: ["P. Green"],
+//            genre: ["Adventure", "Fantasy"],
+//            description: "A young druid connects with the ancient spirits of the forest to save their home.",
+//            imageID: "https://picsum.photos/id/213/200/300",
+//            isComplete: true,
+//            chapter: 35
+//        ),
+//        Comic(
+//            title: "The Silicon Soul",
+//            author: ["Q. Byte"],
+//            genre: ["Sci-Fi", "Philosophy"],
+//            description: "An AI gains sentience and questions the nature of its existence.",
+//            imageID: "https://picsum.photos/id/214/200/300",
+//            isComplete: true,
+//            chapter: 60
+//        )
     ]
     
     // You might want to filter these based on search text later

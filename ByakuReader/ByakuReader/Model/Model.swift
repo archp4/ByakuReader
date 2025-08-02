@@ -194,33 +194,6 @@ struct Comic: Identifiable, Codable {
     }
 }
 
-func fetchChapters(forComicId comicId: String, completion: @escaping (Result<[Chapter], Error>) -> Void) {
-    let db = Databases(client)
-    
-    Task {
-        do {
-            let queries = [
-                Query.equal("comicId", comicId)
-            ]
-            
-            let response = try await db.listDocuments(
-                databaseId: databaseID,
-                collectionId: chaptersCollectionID,
-                queries: queries
-            )
-            
-            let chapters: [Chapter] = try response.documents.compactMap { document in
-                let dict = document.data.mapValues { $0.value }
-                let jsonData = try JSONSerialization.data(withJSONObject: dict)
-                return try JSONDecoder().decode(Chapter.self, from: jsonData)
-            }
-            
-            completion(.success(chapters))
-        } catch {
-            completion(.failure(error))
-        }
-    }
-}
 
 
 struct ReadingProgress: Identifiable, Codable {
@@ -228,43 +201,17 @@ struct ReadingProgress: Identifiable, Codable {
     let userId: String
     let comicId: String
     let chapterId: String
-    let lastPageNumber: Int
-    let updatedAt: Date
+    let lastReadAt: Date
 
     enum CodingKeys: String, CodingKey {
         case id = "$id"
-        case userId, comicId, chapterId, lastPageNumber, updatedAt
-    }
-    
-    init(id: String, userId: String, comicId: String, chapterId: String, lastPageNumber: Int, updatedAt: Date) {
-        self.id = id
-        self.userId = userId
-        self.comicId = comicId
-        self.chapterId = chapterId
-        self.lastPageNumber = lastPageNumber
-        self.updatedAt = updatedAt
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(String.self, forKey: .id)
-        userId = try container.decode(String.self, forKey: .userId)
-        comicId = try container.decode(String.self, forKey: .comicId)
-        chapterId = try container.decode(String.self, forKey: .chapterId)
-        lastPageNumber = try container.decode(Int.self, forKey: .lastPageNumber)
-        updatedAt = try container.decode(Date.self, forKey: .updatedAt)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(userId, forKey: .userId)
-        try container.encode(comicId, forKey: .comicId)
-        try container.encode(chapterId, forKey: .chapterId)
-        try container.encode(lastPageNumber, forKey: .lastPageNumber)
-        try container.encode(updatedAt, forKey: .updatedAt)
+        case userId
+        case comicId
+        case chapterId
+        case lastReadAt
     }
 }
+
 
 
 
