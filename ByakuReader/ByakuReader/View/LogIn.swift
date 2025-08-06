@@ -57,6 +57,14 @@ struct LogIn: View {
             Alert(title: Text("Alert"),
                   message: Text(alertMessage),
                   dismissButton: .default(Text("OK")))
+        }.onAppear{
+            let locationService = LocationService()
+            locationService.onLocationUpdate = { state, country in
+                print("State:", state ?? "Unknown")
+                print("Country:", country ?? "Unknown")
+            }
+
+            
         }
     }
 }

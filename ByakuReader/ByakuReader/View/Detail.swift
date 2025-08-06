@@ -15,7 +15,7 @@ struct Detail: View {
         guard comic.chapter > 0 else { return [] }
         return (1...comic.chapter).map { "\($0)" }
     }
-
+    @State private var locationService = LocationService()
     @State var chapterIdHolder : String = ""
     @EnvironmentObject var user : UserAppwriteDetail
     
@@ -60,7 +60,8 @@ struct Detail: View {
                         Button("Chapter \(item)") {
                             chapterIdHolder = "\(comic.id)_\(item)"
                             let temp = ReadingProgress(id: "\(user.userId)\(item)\(String(comic.id.prefix(4)))", userId: user.userId, comicId: comic.id, chapterId: chapterIdHolder)
-                            let locationService = LocationService()
+
+                            
                             locationService.onLocationUpdate = { state, country in
                                 let s = state ?? "Unknown"
                                 let c = country ?? "Unknown"
@@ -69,6 +70,7 @@ struct Detail: View {
                                     await Appwrite().insertComicEngagement(_:tempEn)
                                 }
                             }
+                            locationService.start()
                             Task{
                                 await Appwrite().insertReadingProgress(progress:temp)
                             }

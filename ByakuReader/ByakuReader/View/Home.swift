@@ -23,7 +23,7 @@ struct Home: View {
         ],
         "Continue Reading": [
         ],
-        "My List": [
+        "All": [
         ]
     ]
     private let title = [
@@ -85,19 +85,11 @@ struct Home: View {
             Appwrite.shared.fetchComics{ result in
                 switch(result){
                 case .success(let allComic):
+                    self.comicCategories["ALL"] = allComic
                     Appwrite.shared.fetchTreadingComics{ resultTreading in
                         switch(resultTreading) {
                         case .success(let resultComic):
                             self.comicCategories["Trending Now"] = resultComic
-                            break
-                        case .failure(_):
-                            break
-                        }
-                    }
-                    Appwrite.shared.fetchMyList(forUserId: user.userId, allcomic: allComic){ resultTreading in
-                        switch(resultTreading) {
-                        case .success(let resultComic):
-                            self.comicCategories["My List"] = resultComic
                             break
                         case .failure(_):
                             break

@@ -205,7 +205,7 @@ class Appwrite {
             let document = try await db.createDocument(
                 databaseId: databaseID,
                 collectionId: reading_progress,
-                documentId: "\(progress.userId)_\(progress.chapterId)",
+                documentId: progress.id,
                 data: data
             )
             print("ReadingProgress document created: \(document)")
@@ -248,7 +248,6 @@ class Appwrite {
             "country": engagement.country,
             "state": engagement.state
         ]
-
         
         do {
             let document = try await db.createDocument(
@@ -260,6 +259,42 @@ class Appwrite {
             print("ComicEngagement document created: \(document)")
         } catch {
             print("Failed to create ComicEngagement document: \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchImageUrl(key: String) async -> String? {
+        var components = URLComponents(string: "https://s3-helper.vercel.app/get-file-url")
+        components?.queryItems = [URLQueryItem(name: "key", value: key)]
+        guard let url = components?.url else {
+            print("Invalid URL")
+            return nil
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return nil
+            }
+            
+            if httpResponse.statusCode == 200 {
+                // Decode JSON response
+                struct ResponseData: Decodable {
+                    let url: String
+                }
+                let decoded = try JSONDecoder().decode(ResponseData.self, from: data)
+                return decoded.url
+            } else {
+                print("Failed to fetch image URL: \(httpResponse.statusCode)")
+                return nil
+            }
+        } catch {
+            print("Error fetching image URL: \(error)")
+            return nil
         }
     }
     
