@@ -15,7 +15,7 @@ struct LogIn: View {
     @State private var alertMessage = ""
     let appwrite = Appwrite()
     
-    @EnvironmentObject var user : User
+    @EnvironmentObject var user : UserAppwriteDetail
     var body: some View {
         NavigationStack{
             TextField("Enter Email",text: $email)
@@ -29,16 +29,23 @@ struct LogIn: View {
                         showAlert = true
                     } else {
                         print("Auth")
-                        let value = await appwrite.onLogin(email.lowercased(), password)
-                        if value {
-                            authFlow = .home
-                        } else {
-                            alertMessage = "Invalid credentials."
-                            showAlert = true
+                        await appwrite.onLogin(email.lowercased(), password) { result in
+                            switch result {
+                            case .success(let userData):
+                                authFlow = .home
+                                user.userId = userData.userId
+                                user.$userEmail = userData.$userEmail
+                                user.userPassword = userData.userPassword
+                            case .failure(let error):
+                                alertMessage = "Appwrite Errr \(error)"
+                                showAlert = true
+                            default:
+                                alertMessage = "Invalid credentials."
+                                showAlert = true
+                            }
                         }
                     }
                 }
-//                authFlow = .home
             }
             .buttonStyle(.borderedProminent)
             Spacer()
@@ -55,5 +62,5 @@ struct LogIn: View {
 }
 
 #Preview {
-    LogIn(authFlow:.constant(.signIn)).environmentObject(User())
+    LogIn(authFlow:.constant(.signIn)).environmentObject(UserAppwriteDetail())
 }

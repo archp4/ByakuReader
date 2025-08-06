@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeViewManager: View {
     @Binding var authFlow: AuthViewManager
-    @EnvironmentObject var user : User
+    @EnvironmentObject var user : UserAppwriteDetail
     var body: some View {
         NavigationStack{
             TabView{
@@ -30,5 +30,5 @@ struct HomeViewManager: View {
     }
 }
 #Preview {
-    HomeViewManager(authFlow:.constant(.home)).environmentObject(User())
+    HomeViewManager(authFlow:.constant(.home)).environmentObject(UserAppwriteDetail())
 }

@@ -8,19 +8,11 @@
 import SwiftUI
 
 struct ComicChapterView : View {
-    let comicImageNames = [
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_1/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_2/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_3/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_4/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_5/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_6/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_7/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_8/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_9/view?project=6840d2580002fa6b80ab",
-        "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225_1_10/view?project=6840d2580002fa6b80ab",
-        
-    ]
+    
+    
+    let chapterId : String
+    @State var comicImageNames : [String] = []
+    @State var title : String = ""
     
     var body: some View {
         NavigationStack{
@@ -43,13 +35,20 @@ struct ComicChapterView : View {
                     }
                 }
             }
-            .navigationTitle("Comic Chapter 01")
+            .navigationTitle("Chapter")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.hidden, for: .navigationBar)
+        }.onAppear{
+            Appwrite.shared.getChapterById(by: chapterId) { result in
+                switch (result) {
+                case .success(let data):
+                    comicImageNames = data.files
+                    title = data.chapterName
+                case .failure(let error):
+                    print("On Chapter Page \(error)")
+                }
+            }
         }
     }
 }
 
-#Preview {
-    ComicChapterView()
-}

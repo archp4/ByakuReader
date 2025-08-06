@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User : ObservableObject {
+class UserAppwriteDetail : ObservableObject {
     @Published var userId : String
     @Published var userName: String
     @Published var userEmail: String

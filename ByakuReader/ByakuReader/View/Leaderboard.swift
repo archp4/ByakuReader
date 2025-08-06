@@ -57,7 +57,7 @@ struct LeaderboardView: View {
             .navigationTitle("Leaderboard")
             .navigationBarTitleDisplayMode(.large)
             .navigationDestination(isPresented: $showDetail) {
-                Detail()
+//                Detail()
             }
         }
     }

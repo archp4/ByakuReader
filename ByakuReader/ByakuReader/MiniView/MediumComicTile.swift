@@ -12,10 +12,11 @@ struct MediumComicTile: View {
     let width: CGFloat
     let height: CGFloat
     @State var showDetail : Bool = false
+    @EnvironmentObject var user : UserAppwriteDetail
     
     var body: some View {
         VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: comic.imageID)) { phase in
+            AsyncImage(url: URL(string: comic.imageId)) { phase in
                 if let image = phase.image {
                     image
                         .resizable()
@@ -49,7 +50,7 @@ struct MediumComicTile: View {
             showDetail = true
         }
         .navigationDestination(isPresented: $showDetail) {
-                Detail()
+            Detail(comic: comic).environmentObject(user)
         }
     }
 }

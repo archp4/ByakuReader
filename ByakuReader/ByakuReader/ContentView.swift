@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var authFlow: AuthViewManager =  .signIn
-    @StateObject var user : User = User()
+    @StateObject var user : UserAppwriteDetail = UserAppwriteDetail()
     var body: some View {
         switch authFlow {
         case .signUp:

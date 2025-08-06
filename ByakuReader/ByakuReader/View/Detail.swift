@@ -8,19 +8,28 @@
 import SwiftUI
 
 struct Detail: View {
-    var items: [String] = ["Chapter 1", "Chapter 2"]
+    let comic: Comic
+
     @State var showChapter : Bool = false
+    var items: [String] {
+        guard comic.chapter > 0 else { return [] }
+        return (1...comic.chapter).map { "\($0)" }
+    }
+
+    @State var chapterIdHolder : String = ""
+    @EnvironmentObject var user : UserAppwriteDetail
+    
     var body: some View {
-        NavigationStack{
-            AsyncImage(url: URL(string: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab")){ phase in
-                if let image = phase.image{
+        NavigationStack {
+            AsyncImage(url: URL(string: comic.imageId)) { phase in
+                if let image = phase.image {
                     image
                         .resizable()
-                        .frame(width: 400,height: 400)
+                        .frame(width: 400, height: 400)
                         .aspectRatio(contentMode: .fill)
                 } else if phase.error != nil {
                     Color.gray
-                        .frame(width:.infinity,height: 300)
+                        .frame(maxWidth: .infinity, maxHeight: 300)
                         .cornerRadius(8)
                         .shadow(radius: 3)
                 } else {
@@ -28,37 +37,57 @@ struct Detail: View {
                 }
             }
             Spacer().frame(height: 10)
-            VStack{
-                Text("Description").frame(maxWidth: .infinity,maxHeight: 8, alignment: .leading)
-                Text("The game has emerged into reality, the rules of the world have been turned upside down and humanity has entered the era of becoming players with the world set as a game stage. The only way to become a player is by leveling up to become stronger! The only way to rise to the top of the world! On the day of world fusion Lin Moyue chose to take on the sole hidden class, Necromancer. From then on, Lin Moyue would not die until his summoned creatures died out. I sit on the throne of bones as the God of the dead and walk between life and death. I am a walking catastrophe!").font(.footnote).foregroundStyle(.gray)
+            VStack(alignment: .leading) {
+                Text("Description")
+                Text(comic.description)
+                    .font(.footnote)
+                    .foregroundColor(.gray)
                     .frame(maxWidth: .infinity, maxHeight: 140, alignment: .leading)
-                HStack{
+                
+                HStack {
                     Text("Genre").font(.footnote)
-                    Text("Shounen, Fantasy, Drama, Adventure, Action").font(.footnote).foregroundStyle(.gray)
-                }.frame(maxWidth: .infinity, alignment: .leading)
+                    Text(comic.genre.joined(separator: ", "))
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+                
                 Spacer().frame(height: 10)
                 Text("Chapters").font(.title3).bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Spacer().frame(height: 10)
-                List{
-                    ForEach(items, id: \.self){ item in
-                        Button(item){
+                List {
+                    ForEach(items, id: \.self) { item in
+                        Button("Chapter \(item)") {
+                            chapterIdHolder = "\(comic.id)_\(item)"
+                            let temp = ReadingProgress(id: "\(user.userId)\(item)\(String(comic.id.prefix(4)))", userId: user.userId, comicId: comic.id, chapterId: chapterIdHolder)
+                            let locationService = LocationService()
+                            locationService.onLocationUpdate = { state, country in
+                                let s = state ?? "Unknown"
+                                let c = country ?? "Unknown"
+                                let tempEn = ComicEngagement(id: "", comicId: comic.id, userId: user.userId, interactionType: "view_chapter", timestamp: Date(), country: c, state: s)
+                                Task{
+                                    await Appwrite().insertComicEngagement(_:tempEn)
+                                }
+                            }
+                            Task{
+                                await Appwrite().insertReadingProgress(progress:temp)
+                            }
                             showChapter = true
                         }
-                    }.listStyle(.inset)
+                    }
+                    .listStyle(.inset)
                 }
                 .listStyle(PlainListStyle())
                 .padding(EdgeInsets(top: -10, leading: -20, bottom: -20, trailing: -20))
-            }.padding()
-            .navigationDestination(isPresented: $showChapter) {
-                ComicChapterView()
             }
-            .navigationTitle("Catastrophic Necromancer")
+            .padding()
+            .navigationDestination(isPresented: $showChapter) {
+                ComicChapterView(chapterId: chapterIdHolder)
+            }
+            .navigationTitle(comic.title)
             .navigationBarTitleDisplayMode(.inline)
-        }.frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-#Preview {
-    Detail()
-}

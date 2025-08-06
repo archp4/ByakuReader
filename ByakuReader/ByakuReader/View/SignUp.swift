@@ -16,7 +16,7 @@ struct SignUp: View {
     @State var password: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
-    @EnvironmentObject var user : User
+    @EnvironmentObject var user : UserAppwriteDetail
     var body: some View {
         NavigationStack{
             TextField("Enter Name",text: $username)
@@ -33,21 +33,29 @@ struct SignUp: View {
                         alertMessage = "Please enter both email and password."
                         showAlert = true
                     } else {
-                        let value = await appwrite.onRegister(email, password)
-                        if value {
-                            alertMessage = "Account Created, You can Login now"
-                            showAlert = true
-                            authFlow = .signIn
-                        } else {
-                            alertMessage = "Invalid credentials."
-                            showAlert = true
+                        await appwrite.onRegister(email, password) { result in
+                            switch result {
+                            case .success(let userData):
+                                alertMessage = "Account Created, You can Login now"
+                                showAlert = true
+                                authFlow = .signIn
+                                user.userId = userData.userId
+                                user.$userEmail = userData.$userEmail
+                                user.userPassword = userData.userPassword
+                            case .failure(let error):
+                                alertMessage = "Appwrite Errr \(error)"
+                                showAlert = true
+                            default:
+                                alertMessage = "Invalid credentials."
+                                showAlert = true
+                                
+                            }
                         }
+                        
                     }
-//                    authFlow = .home
                 }
             }
             .buttonStyle(.borderedProminent)
-            //            .frame(width: .infinity)
             Spacer()
             Button("Already have account? Login"){
                 authFlow = .signIn
@@ -63,5 +71,5 @@ struct SignUp: View {
 
 
 #Preview {
-    SignUp(authFlow:.constant(.signUp)).environmentObject(User())
+    SignUp(authFlow:.constant(.signUp)).environmentObject(UserAppwriteDetail())
 }
