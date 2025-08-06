@@ -214,7 +214,7 @@ struct ChapterDetails: Identifiable, Codable {
     let id: String
     let chapterName: String
     let chapterId: String
-    let files : [String]
+    var files : [String]
     
     enum CodingKeys: String, CodingKey {
         case id = "$id"

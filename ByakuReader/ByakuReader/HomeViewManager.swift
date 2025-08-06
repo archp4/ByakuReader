@@ -21,7 +21,7 @@ struct HomeViewManager: View {
                     Image(systemName: "heart.fill")
                     Text("My Favourite")
                 }
-                LeaderboardView().tabItem {
+                LeaderboardView(rankings: [:]).tabItem {
                     Image(systemName: "trophy.fill")
                     Text("Leaderboard")
                 }

@@ -88,8 +88,13 @@ class Appwrite {
                 )
                 let data = document.data.mapValues {$0.value }
                 let jsonData = try JSONSerialization.data(withJSONObject: data)
-                let object = try JSONDecoder().decode(ChapterDetails.self, from: jsonData)
-                print(object.files)
+                var object = try JSONDecoder().decode(ChapterDetails.self, from: jsonData)
+//                var images : [String] = []
+//                for i in object.files {
+//                    var ni = await fetchImageUrl(key: i)
+//                    images.append(ni!)
+//                }
+//                object.files = images
                 completion(.success(object))
             } catch {
                 completion(.failure(error))
@@ -191,6 +196,31 @@ class Appwrite {
         }
     }
     
+    func fetchEngagements(completion: @escaping (Result<[ComicEngagement], Error>) -> Void) {
+        let db = Databases(client)
+        Task {
+            do {
+                let response = try await db.listDocuments(
+                    databaseId: databaseID,
+                    collectionId: comic_engagements
+                )
+                let engagements = try response.documents.map { doc in
+                    let data = doc.data.mapValues { $0.value }
+                    let jsonData = try JSONSerialization.data(withJSONObject: data)
+                    return try JSONDecoder().decode(ComicEngagement.self, from: jsonData)
+                }
+                
+                completion(.success(engagements))
+            } catch {
+                print("Failed to fetch engagements: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+
+    
     func insertReadingProgress(progress: ReadingProgress) async {
         let db = Databases(client)
         
@@ -282,7 +312,6 @@ class Appwrite {
             }
             
             if httpResponse.statusCode == 200 {
-                // Decode JSON response
                 struct ResponseData: Decodable {
                     let url: String
                 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Detail: View {
     let comic: Comic
-
+    
     @State var showChapter : Bool = false
     var items: [String] {
         guard comic.chapter > 0 else { return [] }
@@ -19,23 +19,43 @@ struct Detail: View {
     @State var chapterIdHolder : String = ""
     @EnvironmentObject var user : UserAppwriteDetail
     
+    @State private var imageUrl: String?
+    @State private var loading = false
+    @State private var error: Error?
+    
     var body: some View {
         NavigationStack {
-            AsyncImage(url: URL(string: comic.imageId)) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .frame(width: 400, height: 400)
-                        .aspectRatio(contentMode: .fill)
-                } else if phase.error != nil {
-                    Color.gray
-                        .frame(maxWidth: .infinity, maxHeight: 300)
-                        .cornerRadius(8)
-                        .shadow(radius: 3)
-                } else {
-                    ProgressView()
+            if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+                AsyncImage(url: url) { phase in
+                    if let image = phase.image {
+                        image
+                            .resizable()
+                            .frame(width: 400, height: 400)
+                            .aspectRatio(contentMode: .fill)
+                    } else if phase.error != nil {
+                        Color.gray
+                            .frame(width: 400, height: 400)
+                            .cornerRadius(8)
+                            .shadow(radius: 3)
+                    } else {
+                        ProgressView()
+                            .frame(width: 400, height: 400)
+                    }
                 }
+            } else if loading {
+                ProgressView().frame(width: 400, height: 400)
+            } else if error != nil {
+                Color.red
+                    .frame(width: 400, height: 400)
+                    .cornerRadius(8)
+                    .overlay(Text("Failed to load image").foregroundColor(.white))
+            } else {
+                Color.gray
+                    .frame(width: 400, height: 400)
+                    .cornerRadius(8)
+                    .overlay(Text("No image URL"))
             }
+            
             Spacer().frame(height: 10)
             VStack(alignment: .leading) {
                 Text("Description")
@@ -60,7 +80,7 @@ struct Detail: View {
                         Button("Chapter \(item)") {
                             chapterIdHolder = "\(comic.id)_\(item)"
                             let temp = ReadingProgress(id: "\(user.userId)\(item)\(String(comic.id.prefix(4)))", userId: user.userId, comicId: comic.id, chapterId: chapterIdHolder)
-
+                            
                             
                             locationService.onLocationUpdate = { state, country in
                                 let s = state ?? "Unknown"
@@ -88,8 +108,23 @@ struct Detail: View {
             }
             .navigationTitle(comic.title)
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear(perform: loadImageUrl)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    func loadImageUrl() {
+        loading = true
+        error = nil
+        Task {
+            do {
+                let url = await Appwrite().fetchImageUrl(key: comic.imageId)
+                imageUrl = url
+            } catch {
+                self.error = error
+            }
+            loading = false
+        }
     }
 }
 

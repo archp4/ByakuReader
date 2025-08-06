@@ -8,21 +8,11 @@
 import SwiftUI
 
 struct LeaderboardView: View {
-    let items: [LeaderboardItem] = [
-        LeaderboardItem(rank: 1, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Last Hope", views: "100K views", score: "100K"),
-        LeaderboardItem(rank: 2, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "Cosmic Crusaders", views: "95K views", score: "95K"),
-        LeaderboardItem(rank: 3, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "Galactic Guardians", views: "90K views", score: "90K"),
-        LeaderboardItem(rank: 4, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Quantum Quest", views: "85K views", score: "85K"),
-        LeaderboardItem(rank: 5, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "Shadow Syndicate", views: "80K views", score: "80K"),
-        LeaderboardItem(rank: 6, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Crimson Comet", views: "75K views", score: "75K"),
-        LeaderboardItem(rank: 7, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Emerald Enigma", views: "70K views", score: "70K"),
-        LeaderboardItem(rank: 8, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Obsidian Order", views: "65K views", score: "65K"),
-        LeaderboardItem(rank: 9, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Silver Serpent", views: "60K views", score: "60K"),
-        LeaderboardItem(rank: 10, imageName: "https://fra.cloud.appwrite.io/v1/storage/buckets/6841a6700036753bfcfb/files/68449647b5d3814ac225/view?project=6840d2580002fa6b80ab", title: "The Golden Gryphon", views: "55K views", score: "55K")
-    ]
     
-    @State private var selectedRegion: String = "Region"
-    @State private var selectedViewFilter: String = "Most Viewed"
+    @State var rankings: [String: [(comic: Comic, count: Int)]]
+    @State var all : [String] = []
+    @State private var selectedRegion: String? = nil
+//    @State private var selectedViewFilter: String = "Most Viewed"
     @State var showDetail : Bool = false
     
     var body: some View {
@@ -31,11 +21,12 @@ struct LeaderboardView: View {
                 HStack {
                     Spacer().frame(width: 20)
                     Menu {
-                        Button("North America") { selectedRegion = "North America" }
-                        Button("Europe") { selectedRegion = "Europe" }
-                        Button("Asia") { selectedRegion = "Asia" }
+                        ForEach(rankings.keys.sorted(), id: \.self){ country in
+                            Button(country) { selectedRegion = country }
+                        }
+                        
                     } label: {
-                        Label(selectedRegion, systemImage: "chevron.down")
+                        Label(selectedRegion ?? "", systemImage: "chevron.down")
                             .font(.subheadline)
                             .padding(.horizontal, 15)
                             .padding(.vertical, 8)
@@ -46,25 +37,67 @@ struct LeaderboardView: View {
                     Spacer()
                 }
                 .padding(.bottom, 10)
-                List(items) { item in
-                    LeaderboardRow(item: item).onTapGesture {
-                        showDetail = true
+                if let selected = selectedRegion, let comics = rankings[selected] {
+                    List(comics, id: \.comic.id) { item in
+                        let local = LeaderboardItem(rank: item.count, comic: item.comic, key: "")
+                        LeaderboardRow(item: local).onTapGesture {
+                            showDetail = true
+                        }.listStyle(PlainListStyle())
+                            .padding(.horizontal, 0)
                     }
+                } else {
+                    
                 }
-                .listStyle(PlainListStyle())
-                .padding(.horizontal, 0)
+
+                
             }
             .navigationTitle("Leaderboard")
             .navigationBarTitleDisplayMode(.large)
             .navigationDestination(isPresented: $showDetail) {
 //                Detail()
+            }.onAppear{
+                Appwrite.shared.fetchComics{ result in
+                    switch(result){
+                    case .success(let allComic):
+                        
+                        Appwrite.shared.fetchEngagements { resultTreading in
+                            switch(resultTreading) {
+                            case .success(let resultComic):
+                                rankings = rankComicsByCountry(from: resultComic, comics: allComic)
+                                selectedRegion = rankings.keys.sorted().first
+                                break
+                            case .failure(_):
+                                break
+                            }
+                        }
+                        
+                    case .failure(_): break
+                    }
+                }
             }
         }
     }
-}
+    
+    func rankComicsByCountry(from engagements: [ComicEngagement], comics comicList: [Comic]) -> [String: [(comic: Comic, count: Int)]] {
+        
+        let groupedByCountry = Dictionary(grouping: engagements, by: { $0.country })
+        let comicDict = Dictionary(uniqueKeysWithValues: comicList.map { ($0.id, $0) })
+        var rankedComicsByCountry: [String: [(comic: Comic, count: Int)]] = [:]
+        for (country, engagements) in groupedByCountry {
+            
+            let counts = engagements.reduce(into: [String: Int]()) { counts, engagement in
+                counts[engagement.comicId, default: 0] += 1
+            }
+            let ranked: [(comic: Comic, count: Int)] = counts.sorted { $0.value > $1.value }
+                .compactMap { (comicId, count) in
+                    guard let comic = comicDict[comicId] else {
+                        return nil
+                    }
+                    return (comic, count)
+                }
+            rankedComicsByCountry[country] = ranked
+        }
+        return rankedComicsByCountry
+    }
 
-// MARK: - Preview
-#Preview {
-    LeaderboardView()
 }
-

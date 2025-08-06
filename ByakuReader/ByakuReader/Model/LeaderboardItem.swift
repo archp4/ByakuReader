@@ -10,8 +10,6 @@ import Foundation
 struct LeaderboardItem: Identifiable {
     let id = UUID()
     let rank: Int
-    let imageName: String
-    let title: String
-    let views: String
-    let score: String
+    let comic: Comic
+    let key: String
 }

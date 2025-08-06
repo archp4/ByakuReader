@@ -12,7 +12,7 @@ struct LeaderboardRow: View {
     
     var body: some View {
         HStack{
-            AsyncImage(url: URL(string: item.imageName)){ phase in
+            AsyncImage(url: URL(string: item.comic.imageId)){ phase in
                 if let image = phase.image{
                     image
                         .resizable()
@@ -32,11 +32,11 @@ struct LeaderboardRow: View {
             }
             VStack(alignment: .leading, spacing: 0) {
                 // Rank and Title
-                Text("\(item.rank). \(item.title)")
+                Text("\(item.rank). \(item.comic.title)")
                     .font(.headline)
                     .fontWeight(.medium)
                 // Views count
-                Text(item.views)
+                Text("")
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
@@ -47,7 +47,4 @@ struct LeaderboardRow: View {
     }
     
 }
-#Preview {
-    LeaderboardRow(
-        item: LeaderboardItem(rank: 7, imageName: "book7", title: "The Emerald Enigma", views: "70K views", score: "70K"))
-}
+

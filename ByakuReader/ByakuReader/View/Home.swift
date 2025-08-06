@@ -26,6 +26,7 @@ struct Home: View {
         "All": [
         ]
     ]
+    @State var listOfCategories : [String] = ["Continue Reading", "Trending Now", "All"]
     private let title = [
         "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria"
     ]
@@ -39,7 +40,7 @@ struct Home: View {
             VStack{
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 20) {
-                        ForEach(comicCategories.keys.sorted(), id: \.self) { category in
+                        ForEach(listOfCategories, id: \.self) { category in
                             HomeRowView(title: category, comics: comicCategories[category]!, itemWidth: 150, itemHeight: 225).environmentObject(user)
                         }
                     }
@@ -85,11 +86,12 @@ struct Home: View {
             Appwrite.shared.fetchComics{ result in
                 switch(result){
                 case .success(let allComic):
-                    self.comicCategories["ALL"] = allComic
+                    
                     Appwrite.shared.fetchTreadingComics{ resultTreading in
                         switch(resultTreading) {
                         case .success(let resultComic):
                             self.comicCategories["Trending Now"] = resultComic
+                            self.comicCategories["All"] = allComic
                             break
                         case .failure(_):
                             break
