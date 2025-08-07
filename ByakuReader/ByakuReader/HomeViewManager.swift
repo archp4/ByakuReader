@@ -17,10 +17,10 @@ struct HomeViewManager: View {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
-                Favorite().tabItem {
-                    Image(systemName: "heart.fill")
-                    Text("My Favourite")
-                }
+//                Favorite().tabItem {
+//                    Image(systemName: "heart.fill")
+//                    Text("My Favourite")
+//                }
                 LeaderboardView(rankings: [:]).tabItem {
                     Image(systemName: "trophy.fill")
                     Text("Leaderboard")

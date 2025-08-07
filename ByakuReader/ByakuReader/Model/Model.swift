@@ -223,6 +223,19 @@ struct ChapterDetails: Identifiable, Codable {
         case files
     }
 }
+struct ComicEngagementLeaderboard: Identifiable, Codable {
+    let id: String
+    let comicId: String
+    let userId: String
+    let interactionType: String
+    let country: String
+    let state: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "$id"
+        case comicId, userId, interactionType, country, state
+    }
+}
 
 struct HomeViewController {
     var treadingComic : [Comic] = []

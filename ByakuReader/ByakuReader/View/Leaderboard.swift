@@ -38,8 +38,8 @@ struct LeaderboardView: View {
                 }
                 .padding(.bottom, 10)
                 if let selected = selectedRegion, let comics = rankings[selected] {
-                    List(comics, id: \.comic.id) { item in
-                        let local = LeaderboardItem(rank: item.count, comic: item.comic, key: "")
+                    List(Array(comics.enumerated()), id: \.element.comic.id) { index, item in
+                        let local = LeaderboardItem(rank: index + 1, comic: item.comic, key: "")
                         LeaderboardRow(item: local).onTapGesture {
                             showDetail = true
                         }.listStyle(PlainListStyle())
@@ -78,7 +78,7 @@ struct LeaderboardView: View {
         }
     }
     
-    func rankComicsByCountry(from engagements: [ComicEngagement], comics comicList: [Comic]) -> [String: [(comic: Comic, count: Int)]] {
+    func rankComicsByCountry(from engagements: [ComicEngagementLeaderboard], comics comicList: [Comic]) -> [String: [(comic: Comic, count: Int)]] {
         
         let groupedByCountry = Dictionary(grouping: engagements, by: { $0.country })
         let comicDict = Dictionary(uniqueKeysWithValues: comicList.map { ($0.id, $0) })

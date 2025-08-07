@@ -74,13 +74,13 @@ struct Home: View {
                         Text("Are you sure you want to log out?")
                     }
                 } // toolbar item 1
-                ToolbarItem(placement: .topBarLeading){
-                    Button{
-                    } label: {
-                        Image(systemName: "person")
-                            .frame(width: 40, height: 40)
-                    }
-                }// toolbar item 2
+//                ToolbarItem(placement: .topBarLeading){
+//                    Button{
+//                    } label: {
+//                        Image(systemName: "person")
+//                            .frame(width: 40, height: 40)
+//                    }
+//                }// toolbar item 2
             }// tool bar
         }.onAppear{
             Appwrite.shared.fetchComics{ result in

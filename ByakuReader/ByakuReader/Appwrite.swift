@@ -112,7 +112,7 @@ class Appwrite {
                     databaseId: databaseID,
                     collectionId: comics_details,
                     queries: [
-                        Query.limit(10)
+                        Query.limit(3)
                     ]
                 )
                 let items: [Comic] = try response.documents.compactMap { document in
@@ -196,7 +196,7 @@ class Appwrite {
         }
     }
     
-    func fetchEngagements(completion: @escaping (Result<[ComicEngagement], Error>) -> Void) {
+    func fetchEngagements(completion: @escaping (Result<[ComicEngagementLeaderboard], Error>) -> Void) {
         let db = Databases(client)
         Task {
             do {
@@ -207,7 +207,7 @@ class Appwrite {
                 let engagements = try response.documents.map { doc in
                     let data = doc.data.mapValues { $0.value }
                     let jsonData = try JSONSerialization.data(withJSONObject: data)
-                    return try JSONDecoder().decode(ComicEngagement.self, from: jsonData)
+                    return try JSONDecoder().decode(ComicEngagementLeaderboard.self, from: jsonData)
                 }
                 
                 completion(.success(engagements))

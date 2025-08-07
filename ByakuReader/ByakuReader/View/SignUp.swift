@@ -19,14 +19,14 @@ struct SignUp: View {
     @EnvironmentObject var user : UserAppwriteDetail
     var body: some View {
         NavigationStack{
-            TextField("Enter Name",text: $username)
-                .padding()
+//            TextField("Enter Name",text: $username)
+//                .padding()
             TextField("Enter Email",text: $email)
                 .padding()
             SecureField("Enter Password", text: $password)
                 .padding()
-            SecureField("Enter Confirm Password", text: $confirmPassword)
-                .padding()
+//            SecureField("Enter Confirm Password", text: $confirmPassword)
+//                .padding()
             Button("Sign Up"){
                 Task{
                     if email.isEmpty || password.isEmpty {
@@ -38,7 +38,7 @@ struct SignUp: View {
                             case .success(let userData):
                                 alertMessage = "Account Created, You can Login now"
                                 showAlert = true
-                                authFlow = .signIn
+                                authFlow = .home
                                 user.userId = userData.userId
                                 user.$userEmail = userData.$userEmail
                                 user.userPassword = userData.userPassword
